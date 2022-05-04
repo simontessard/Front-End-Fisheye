@@ -20,14 +20,17 @@ function photographerFactory(data) {
         const location = document.createElement( 'p' );
         location.textContent = city + ', ' + country;
         location.setAttribute("aria-label", name + 'est localisé à ' + city + ', ' + country);
+        location.setAttribute("class", 'photographer_location');
 
         const quote = document.createElement( 'p' );
         quote.textContent = tagline;
         quote.setAttribute("aria-label", tagline);
+        quote.setAttribute("class", 'photographer_quote');
 
         const pricing = document.createElement( 'p' );
         pricing.textContent = price + '€/jour';
         pricing.setAttribute("aria-label", price + '€ par jour');
+        pricing.setAttribute("class", 'photographer_pricing');
 
         article.appendChild(img);
         article.appendChild(h2);
