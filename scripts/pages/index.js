@@ -26,8 +26,10 @@
             photographers.forEach((photographer) => {
                 const photographerModel = photographerFactory(photographer);
                 const userCardDOM = photographerModel.getUserCardDOM();
+                // Désigne le premier enfant de la carte, soit la div contenent l'image et nom du photographe
                 userCardDOM.children[0].setAttribute("tabindex", tabindex);
                 tabindex++;
+                // Désigne le second enfant de la carte, soit la div contenent les informations du photographe
                 userCardDOM.children[1].setAttribute("tabindex", tabindex);
                 tabindex++;
                 photographersSection.appendChild(userCardDOM);
