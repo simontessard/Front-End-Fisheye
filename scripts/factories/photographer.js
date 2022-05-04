@@ -32,11 +32,25 @@ function photographerFactory(data) {
         pricing.setAttribute("aria-label", price + '€ par jour');
         pricing.setAttribute("class", 'photographer_pricing');
 
-        article.appendChild(img);
-        article.appendChild(h2);
-        article.appendChild(location);
-        article.appendChild(quote);
-        article.appendChild(pricing);
+        const header = document.createElement( 'div' );
+        header.setAttribute("class", 'photographer_header');
+        header.setAttribute("aria-label", name);
+        header.setAttribute("tabindex", '3');
+
+        article.appendChild(header);
+
+        header.appendChild(img);
+        header.appendChild(h2);
+
+        const informations = document.createElement( 'div' );
+        informations.setAttribute("class", 'photographer_information');
+        informations.setAttribute("tabindex", '4');
+
+        article.appendChild(informations);
+
+        informations.appendChild(location);
+        informations.appendChild(quote);
+        informations.appendChild(pricing);
         return (article);
     }
     return { name, picture, getUserCardDOM }
