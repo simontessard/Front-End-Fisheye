@@ -7,20 +7,20 @@ body {
 
 header {
     display: flex;
-    flex-direction: row;
+    flex-direction: row wrap;
     justify-content: space-between;
     align-items: center;
     height: 90px;
+    padding-inline: 100px;
 }
 
 h1 {
     color: #901C1C;
-    margin-right: 100px;
+    display: flex;
 }
 
 .logo {
     height: 50px;
-    margin-left: 100px;
 }
 
 .photographer_section {

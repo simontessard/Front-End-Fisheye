@@ -35,7 +35,6 @@ function photographerFactory(data) {
         const header = document.createElement( 'div' );
         header.setAttribute("class", 'photographer_header');
         header.setAttribute("aria-label", name);
-        header.setAttribute("tabindex", '3');
 
         article.appendChild(header);
 
@@ -44,7 +43,6 @@ function photographerFactory(data) {
 
         const informations = document.createElement( 'div' );
         informations.setAttribute("class", 'photographer_information');
-        informations.setAttribute("tabindex", '4');
 
         article.appendChild(informations);
 

@@ -20,12 +20,18 @@
     async function displayData(photographers) {
         const photographersSection = document.querySelector(".photographer_section");
 
-        
+        let tabindex = 2;
+
         if (typeof photographers !== 'undefined') {
             photographers.forEach((photographer) => {
                 const photographerModel = photographerFactory(photographer);
                 const userCardDOM = photographerModel.getUserCardDOM();
+                userCardDOM.children[0].setAttribute("tabindex", tabindex);
+                tabindex++;
+                userCardDOM.children[1].setAttribute("tabindex", tabindex);
+                tabindex++;
                 photographersSection.appendChild(userCardDOM);
+                console.log(tabindex);
             });
         }
     };
