@@ -19,6 +19,10 @@ h1 {
     display: flex;
 }
 
+a {
+    text-decoration: none;
+}
+
 .logo {
     height: 50px;
 }
@@ -74,7 +78,7 @@ h1 {
     text-align: center;
 }
 
-.photographer_section .photographer_header {
+.photographer_section .photographer_vignette {
     text-align: center;
 }
 

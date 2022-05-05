@@ -39,6 +39,13 @@
                 // Désigne le second enfant de la carte, soit la div contenent les informations du photographe
                 userCardDOM.children[1].setAttribute("tabindex", tabindex);
                 tabindex++;
+                // Assigner l'ID à la vignette du photographe
+                vignette = userCardDOM.children[0];
+                vignette.setAttribute("id", photographerModel.id);
+                vignette.setAttribute("href", "photographer.html?id="+vignette.id);
+                vignette.addEventListener("click", function() {
+                    console.log(this.id);
+                });
                 photographersSection.appendChild(userCardDOM);
             });
         }
