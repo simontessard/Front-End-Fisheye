@@ -36,11 +36,17 @@ h1 {
 
 .photographer_section article {
     display: flex;
-    flex: 25%;
+    flex: 1 1 25%;
     justify-self: center;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+@media (min-width:400px) and (max-width:900px) {
+    .photographer_section article {
+        flex: 30%;
+    }
 }
 
 .photographer_section article h2 {
