@@ -22,10 +22,10 @@ function photographerFactory(data) {
         location.setAttribute("aria-label", name + 'est localisé à ' + city + ', ' + country);
         location.setAttribute("class", 'photographer_location');
 
-        const quote = document.createElement( 'p' );
-        quote.textContent = tagline;
-        quote.setAttribute("aria-label", tagline);
-        quote.setAttribute("class", 'photographer_quote');
+        const slogan = document.createElement( 'p' );
+        slogan.textContent = tagline;
+        slogan.setAttribute("aria-label", tagline);
+        slogan.setAttribute("class", 'photographer_slogan');
 
         const pricing = document.createElement( 'p' );
         pricing.textContent = price + '€/jour';
@@ -47,7 +47,7 @@ function photographerFactory(data) {
         article.appendChild(informations);
 
         informations.appendChild(location);
-        informations.appendChild(quote);
+        informations.appendChild(slogan);
         informations.appendChild(pricing);
         return (article);
     }
