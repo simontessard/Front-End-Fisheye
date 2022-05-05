@@ -16,11 +16,8 @@
             // Convertit en JSON
             return response.json();})
         .then(data => {
-        // Afficher dans la console
-        console.log(data["photographers"]);
 
         // Retourner les données;
-        // return data["photographers"];
         return ({
             photographers: [...data["photographers"]]})
         });
@@ -43,7 +40,6 @@
                 userCardDOM.children[1].setAttribute("tabindex", tabindex);
                 tabindex++;
                 photographersSection.appendChild(userCardDOM);
-                console.log(tabindex);
             });
         }
     };
@@ -51,7 +47,6 @@
     async function init() {
         // Récupère les datas des photographes
         const { photographers } = await getPhotographers() || {};
-        console.log(photographers);
         
         if (typeof photographers !== 'undefined') {
             displayData(photographers);
