@@ -43,9 +43,14 @@ h1 {
     flex-direction: column;
 }
 
-@media (min-width:400px) and (max-width:900px) {
+@media (min-width:768px) and (max-width:900px) {
     .photographer_section article {
         flex: 30%;
+    }
+}
+@media (max-width:768px) {
+    .photographer_section article {
+        flex: 100%;
     }
 }
 
