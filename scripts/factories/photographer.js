@@ -12,6 +12,7 @@ function photographerFactory(data) {
         img.setAttribute("src", picture);
         // ALT pour faire une description de l'image
         img.setAttribute("alt", name + ' portrait')
+        img.setAttribute("class", 'photographer_img');
 
         const h2 = document.createElement( 'h2' );
         h2.textContent = name;
