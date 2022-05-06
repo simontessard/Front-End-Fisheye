@@ -27,6 +27,21 @@
     object-fit: cover;
 }
 
+.gallery_info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.media_likeInfo {
+    display: flex;
+    flex-flow: row;
+}
+
+.media_likes {
+    margin-right: 7px;
+}
+
 .contact_button {
     font-size: 20px;
     font-weight: bold;

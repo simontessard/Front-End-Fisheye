@@ -88,14 +88,42 @@ async function displayMedias(medias) {
     const galleryFile = await getPhotographerNameById(photographerId);
     const picture = `assets/photos/${galleryFile}/${image}`;
 
-    const mediaImg = document.createElement( 'img' );
+    const mediaImg = document.createElement('img');
+    const mediaTitle = document.createElement('h3');
+    const mediaLikes = document.createElement('p');
+    const likeHeart = document.createElement('img');
+    const likeInfo = document.createElement('div');
+    const articleInfo = document.createElement('div');
+    const galleryArticle = document.createElement('article');
+
+    // Image de l'article de la galerie
     mediaImg.setAttribute("src", picture);
-    // ALT pour faire une description de l'image
     mediaImg.setAttribute("alt", title)
     mediaImg.setAttribute("class", 'gallery_img');
 
-    gallery.appendChild(mediaImg);
+    // Info
+    articleInfo.setAttribute("class", 'gallery_info');
 
+    // Titre de l'article de la galerie
+    mediaTitle.textContent = title;
+    mediaTitle.setAttribute("aria-label", title);
+
+    // Likes de l'article de la galerie
+    mediaLikes.textContent = likes;
+    mediaLikes.setAttribute("aria-label", likes);
+    mediaLikes.setAttribute("class", "media_likes");
+
+    // Logo like
+    likeHeart.setAttribute("src", '../assets/icons/heart.svg');
+    likeInfo.setAttribute("class", "media_likeInfo")
+    
+    articleInfo.appendChild(mediaTitle);
+    articleInfo.appendChild(likeInfo);
+    likeInfo.appendChild(mediaLikes);
+    likeInfo.appendChild(likeHeart);
+    galleryArticle.appendChild(mediaImg);
+    galleryArticle.appendChild(articleInfo);
+    gallery.appendChild(galleryArticle);
     portfolio.appendChild(gallery);
 
     console.log(picture);
