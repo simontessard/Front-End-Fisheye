@@ -73,22 +73,18 @@ async function displayPhotographer(photographer) {
 };
 
 async function displayMedias(medias) {
-
-    console.log(medias[0]);
-
-    // const { date, id, likes, photographerId, price, image, title } = medias[0][0];
-
     const portfolio = document.querySelector('#main');
     const gallery = document.createElement('div');
     gallery.setAttribute("class", 'photograph-gallery');
 
     medias[0].forEach(async (media) => {
         
-    const { date, id, likes, photographerId, price, image, title } = media;
+    const { date, id, likes, photographerId, price, image, title, video } = media;
     const galleryFile = await getPhotographerNameById(photographerId);
     const picture = `assets/photos/${galleryFile}/${image}`;
 
     const mediaImg = document.createElement('img');
+    const mediaVideo = document.createElement('video');
     const mediaTitle = document.createElement('h3');
     const mediaLikes = document.createElement('p');
     const likeHeart = document.createElement('img');
@@ -97,10 +93,20 @@ async function displayMedias(medias) {
     const galleryArticle = document.createElement('article');
 
     // Image de l'article de la galerie
-    mediaImg.setAttribute("src", picture);
-    mediaImg.setAttribute("alt", title)
-    mediaImg.setAttribute("class", 'gallery_img');
-
+    if (image != null) {
+        mediaImg.setAttribute("src", picture);
+        mediaImg.setAttribute("alt", title)
+        mediaImg.setAttribute("class", 'gallery_img');
+        galleryArticle.appendChild(mediaImg);
+    }
+    else {
+        source = document.createElement('source');
+        source.src = `assets/photos/${galleryFile}/${video}`;
+        mediaVideo.appendChild(source);
+        mediaVideo.setAttribute("class", 'gallery_img');
+        galleryArticle.appendChild(mediaVideo);
+    }
+    
     // Info
     articleInfo.setAttribute("class", 'gallery_info');
 
@@ -121,14 +127,13 @@ async function displayMedias(medias) {
     articleInfo.appendChild(likeInfo);
     likeInfo.appendChild(mediaLikes);
     likeInfo.appendChild(likeHeart);
-    galleryArticle.appendChild(mediaImg);
     galleryArticle.appendChild(articleInfo);
     gallery.appendChild(galleryArticle);
     portfolio.appendChild(gallery);
 
     console.log(picture);
     });
-}; 
+};
 
 async function initPhotographer() {
     // Récupère les datas des photographes

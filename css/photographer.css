@@ -5,7 +5,7 @@
 .photograph-header {
     background-color: #FAFAFA;
     height: 300px;
-    margin: 0 100px;
+    margin: 0 100px 50px;
     display: flex;
     justify-content: space-between;
     flex-flow: row-reverse;
@@ -17,7 +17,7 @@
     display: flex;
     gap:50px;
     flex-flow: row wrap;
-    justify-content: center; 
+    justify-content: center;
 }
 
 .gallery_img {
