@@ -121,7 +121,11 @@ async function displayMedias(medias) {
 
     // Logo like
     likeHeart.setAttribute("src", '../assets/icons/heart.svg');
-    likeInfo.setAttribute("class", "media_likeInfo")
+    likeInfo.setAttribute("class", "media_likeInfo");
+    likeInfo.addEventListener('click', function(event) {
+        newLikes = parseInt(mediaLikes.textContent);
+        mediaLikes.textContent = newLikes + 1;
+    })
     
     articleInfo.appendChild(mediaTitle);
     articleInfo.appendChild(likeInfo);
