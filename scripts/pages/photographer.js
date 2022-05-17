@@ -124,7 +124,13 @@ async function displayMedias(medias) {
     likeInfo.setAttribute("class", "media_likeInfo");
     likeInfo.addEventListener('click', function(event) {
         newLikes = parseInt(mediaLikes.textContent);
-        mediaLikes.textContent = newLikes + 1;
+        if (newLikes != likes + 1) {
+            mediaLikes.textContent = newLikes + 1;
+        }
+        else {
+            mediaLikes.textContent = newLikes -1;
+        }
+        
     })
     
     articleInfo.appendChild(mediaTitle);
@@ -133,6 +139,7 @@ async function displayMedias(medias) {
     likeInfo.appendChild(likeHeart);
     galleryArticle.appendChild(articleInfo);
     gallery.appendChild(galleryArticle);
+    // portfolio.appendChild(sortByContainer);
     portfolio.appendChild(gallery);
 
     console.log(picture);
