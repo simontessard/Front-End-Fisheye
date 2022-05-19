@@ -1,3 +1,4 @@
+totalLikes = 0;
 
 async function getPhotographer() {
 
@@ -72,13 +73,19 @@ async function displayPhotographer(photographer) {
     }
 };
 
-async function displayMedias(medias) {
+async function displayMedias(medias, photoGraphPrice) {
     const portfolio = document.querySelector('#main');
     const gallery = document.createElement('div');
     gallery.setAttribute("class", 'photograph-gallery');
+    const moreInfo = document.createElement('div');
+    const dailyPrice = document.createElement('p');
+    const allLikes = document.createElement('p');
+    const darkHeart = document.createElement('img');
+    darkHeart.setAttribute("src", '../assets/icons/heart.svg');
+    darkHeart.setAttribute("class", 'dark-heart');
 
     medias[0].forEach(async (media) => {
-        
+
     const { date, id, likes, photographerId, price, image, title, video } = media;
     const galleryFile = await getPhotographerNameById(photographerId);
     const picture = `assets/photos/${galleryFile}/${image}`;
@@ -106,7 +113,6 @@ async function displayMedias(medias) {
         mediaVideo.setAttribute("class", 'gallery_img');
         galleryArticle.appendChild(mediaVideo);
     }
-    
     // Info
     articleInfo.setAttribute("class", 'gallery_info');
 
@@ -130,9 +136,8 @@ async function displayMedias(medias) {
         else {
             mediaLikes.textContent = newLikes -1;
         }
-        
-    })
-    
+    });
+
     articleInfo.appendChild(mediaTitle);
     articleInfo.appendChild(likeInfo);
     likeInfo.appendChild(mediaLikes);
@@ -141,9 +146,25 @@ async function displayMedias(medias) {
     gallery.appendChild(galleryArticle);
     // portfolio.appendChild(sortByContainer);
     portfolio.appendChild(gallery);
-
-    console.log(picture);
+    
+    totalLikes = totalLikes + likes;
+    allLikes.textContent = totalLikes;
     });
+
+    moreInfo.appendChild(allLikes);
+    moreInfo.appendChild(darkHeart);
+    moreInfo.appendChild(dailyPrice);
+    portfolio.appendChild(moreInfo);
+
+    // Price + all likes
+    moreInfo.setAttribute("class", "photograph-moreinfo");
+
+    allLikes.setAttribute("aria-label", totalLikes);
+    allLikes.setAttribute("class", "media_likes");
+
+    dailyPrice.textContent = photoGraphPrice + '€ / jour';
+    dailyPrice.setAttribute("aria-label", photoGraphPrice);
+    dailyPrice.setAttribute("class", "media_likes");
 };
 
 async function initPhotographer() {
@@ -151,11 +172,13 @@ async function initPhotographer() {
     const { photographer } = await getPhotographer() || {};
     const { medias } = await getPhotographerMedia(photographer[0].id) || {};
 
+    const photoGraphPrice = photographer[0].price;
+
     console.log(medias);
  
     if (typeof photographer !== 'undefined') {
         displayPhotographer(photographer);
-        displayMedias(medias);
+        displayMedias(medias, photoGraphPrice);
     }
 };
 
