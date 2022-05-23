@@ -24,6 +24,16 @@
     cursor: pointer;
 }
 
+.photograph-title {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 83px;
+    color: #D3573C;
+    margin:0;
+}
+
 .photograph-moreinfo {
     display: flex;
     align-items: center;
@@ -108,6 +118,9 @@
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+    font-family: 'DM Sans';
+    font-style: normal;
+    line-height: 26px;
 }
 
 .second-title {

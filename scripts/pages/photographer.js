@@ -1,3 +1,13 @@
+// Ajout d'un lien vers l'accueil sur le logo
+const logo = document.querySelector(".logo");
+const header = document.querySelector('header');
+const link = document.createElement('a')
+header.insertBefore(link, logo);
+link.setAttribute('alt','Fisheye Home page');
+link.setAttribute('tabindex','1');
+link.setAttribute('href','index.html');
+link.appendChild(logo);
+
 totalLikes = 0;
 
 async function getPhotographer() {
@@ -50,6 +60,7 @@ async function displayPhotographer(photographer) {
 
             const prenom = document.createElement('h1');
             prenom.textContent = name;
+            prenom.setAttribute('class','photograph-title');
 
             const location = document.createElement('h2');
             location.textContent = city + ', ' + country;
