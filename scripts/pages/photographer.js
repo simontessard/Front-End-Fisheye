@@ -146,6 +146,7 @@ async function displayMedias(medias, photoGraphPrice) {
     // Titre de l'article de la galerie
     mediaTitle.textContent = title;
     mediaTitle.setAttribute("aria-label", title);
+    mediaTitle.setAttribute("class", "media_title");
 
     // Likes de l'article de la galerie
     mediaLikes.textContent = likes;
@@ -187,11 +188,9 @@ async function displayMedias(medias, photoGraphPrice) {
     moreInfo.setAttribute("class", "photograph-moreinfo");
 
     allLikes.setAttribute("aria-label", totalLikes);
-    allLikes.setAttribute("class", "media_likes");
 
     dailyPrice.textContent = photoGraphPrice + '€ / jour';
     dailyPrice.setAttribute("aria-label", photoGraphPrice);
-    dailyPrice.setAttribute("class", "media_likes");
 };
 
 async function displayModalMedia(mediasList, id) {
