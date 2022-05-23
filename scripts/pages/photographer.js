@@ -58,9 +58,13 @@ async function displayPhotographer(photographer) {
     if (typeof photographer !== 'undefined') {
             const photographerInfo = document.createElement('div');
 
-            const prenom = document.createElement('h1');
-            prenom.textContent = name;
-            prenom.setAttribute('class','photograph-title');
+            const photographerName = document.createElement('h1');
+            photographerName.textContent = name;
+            photographerName.setAttribute('class','photograph-title');
+            photographerName.setAttribute('tabindex','2');
+
+            const photographerMoreInfo = document.createElement('div');
+            photographerMoreInfo.setAttribute('tabindex','3');
 
             const location = document.createElement('h2');
             location.textContent = city + ', ' + country;
@@ -69,16 +73,21 @@ async function displayPhotographer(photographer) {
             const slogan = document.createElement('p');
             slogan.textContent = tagline;
 
-            const img = document.createElement( 'img' );
+            const img = document.createElement('img');
             img.setAttribute("src", picture);
             // ALT pour faire une description de l'image
             img.setAttribute("alt", name + ' portrait')
             img.setAttribute("class", 'photographer_img');
+            img.setAttribute('tabindex','5');
             img.style.order = -1 ;
 
-            photographerInfo.appendChild(prenom);
-            photographerInfo.appendChild(location);
-            photographerInfo.appendChild(slogan);
+            const contactButton = document.querySelector('.contact_button');
+            contactButton.setAttribute('tabindex','4');
+
+            photographerInfo.appendChild(photographerName);
+            photographerMoreInfo.appendChild(location);
+            photographerMoreInfo.appendChild(slogan);
+            photographerInfo.appendChild(photographerMoreInfo);
 
             photographersHeader.appendChild(photographerInfo);
             photographersHeader.appendChild(img);
