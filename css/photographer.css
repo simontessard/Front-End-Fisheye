@@ -20,6 +20,10 @@
     justify-content: center;
 }
 
+.photograph-gallery article img{
+    cursor: pointer;
+}
+
 .photograph-moreinfo {
     display: flex;
     align-items: center;
@@ -34,7 +38,7 @@
     bottom: 0;
     right: 0;
     margin-right: 3%;
-    padding-inline: 30px;
+    padding-inline: 40px;
 }
 
 .dark-heart {
@@ -104,6 +108,62 @@
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.second-title {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 31px;
+    color: #901C1C;
+}
+
+.modal-media {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-container {
+   position: relative;
+}
+
+.mediaModal-closeButton {
+    position: absolute;
+    top:2%;
+    right:-6%;
+    cursor: pointer;
+}
+
+.mediaModal-previousButton {
+    position: absolute;
+    top:50%;
+    left:-6%;
+    cursor: pointer;
+}
+
+.mediaModal-nextButton {
+    position: absolute;
+    top:50%;
+    right:-6%;
+    cursor: pointer;
+}
+
+.mediaModal-picture {
+    border-radius: 5px;
+    height: 850px;
+    width: 1050px;
+    align-self: top;
+    object-fit: cover;
 }
 
 .modal {

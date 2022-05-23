@@ -53,6 +53,7 @@ async function displayPhotographer(photographer) {
 
             const location = document.createElement('h2');
             location.textContent = city + ', ' + country;
+            location.setAttribute('class','second-title');
 
             const slogan = document.createElement('p');
             slogan.textContent = tagline;
@@ -84,7 +85,9 @@ async function displayMedias(medias, photoGraphPrice) {
     darkHeart.setAttribute("src", '../assets/icons/heart.svg');
     darkHeart.setAttribute("class", 'dark-heart');
 
-    medias[0].forEach(async (media) => {
+    mediasList = medias[0];
+    console.log(mediasList);
+    mediasList.forEach(async (media) => {
 
     const { date, id, likes, photographerId, price, image, title, video } = media;
     const galleryFile = await getPhotographerNameById(photographerId);
@@ -105,6 +108,10 @@ async function displayMedias(medias, photoGraphPrice) {
         mediaImg.setAttribute("alt", title)
         mediaImg.setAttribute("class", 'gallery_img');
         galleryArticle.appendChild(mediaImg);
+
+        mediaImg.addEventListener("click", function() {
+            displayModalMedia(mediasList, id);
+        });
     }
     else {
         source = document.createElement('source');
@@ -166,6 +173,62 @@ async function displayMedias(medias, photoGraphPrice) {
     dailyPrice.setAttribute("aria-label", photoGraphPrice);
     dailyPrice.setAttribute("class", "media_likes");
 };
+
+async function displayModalMedia(mediasList, id) {
+    media = mediasList.filter(item => item.id == id)[0];
+
+    // Récupération de l'index du media cliqué
+    index = mediasList.indexOf(media);
+
+    const galleryFile = await getPhotographerNameById(media.photographerId);
+    const picture = `assets/photos/${galleryFile}/${media.image}`;
+
+    const portfolio = document.querySelector('#main');
+
+    const modalMedia = document.createElement('div');
+    modalMedia.setAttribute("class", "modal-media");
+    const modalContainer = document.createElement('div');
+    modalContainer.setAttribute("class", "modal-container");
+    const mediaPicture = document.createElement('img');
+    mediaPicture.setAttribute("src", picture);
+    mediaPicture.setAttribute('class','mediaModal-picture');
+    const titlePicture = document.createElement('p');
+    titlePicture.textContent = media.title;
+    titlePicture.setAttribute('class','second-title');
+    const closeButton = document.createElement('img');
+    closeButton.setAttribute("src", '../assets/icons/redcross.svg');
+    closeButton.setAttribute('class','mediaModal-closeButton');
+    const previousButton = document.createElement('img');
+    previousButton.setAttribute("src", '../assets/icons/previousarrow.svg');
+    previousButton.setAttribute('class','mediaModal-previousButton');
+    const nextButton = document.createElement('img');
+    nextButton.setAttribute("src", '../assets/icons/nextarrow.svg');
+    nextButton.setAttribute('class','mediaModal-nextButton');
+
+    modalContainer.appendChild(mediaPicture);
+    modalContainer.appendChild(titlePicture);
+    modalContainer.appendChild(closeButton);
+    modalContainer.appendChild(previousButton);
+    modalContainer.appendChild(nextButton);
+    modalMedia.appendChild(modalContainer);
+    portfolio.appendChild(modalMedia);
+
+    modalMedia.style.display="flex";
+
+    closeButton.addEventListener("click", function() {
+        modalMedia.style.display="none";
+    });
+    previousButton.addEventListener("click", function() {
+        modalMedia.style.display="none";
+        previousMedia = mediasList[index-1];
+        displayModalMedia(mediasList, previousMedia.id)
+    });
+    nextButton.addEventListener("click", function() {
+        modalMedia.style.display="none";
+        nextMedia = mediasList[index+1];
+        displayModalMedia(mediasList, nextMedia.id)
+    });
+}
 
 async function initPhotographer() {
     // Récupère les datas des photographes

@@ -43,9 +43,7 @@
                 vignette = userCardDOM.children[0];
                 vignette.setAttribute("id", photographerModel.id);
                 vignette.setAttribute("href", "photographer.html?id="+vignette.id);
-                vignette.addEventListener("click", function() {
-                    console.log(this.id);
-                });
+                
                 photographersSection.appendChild(userCardDOM);
             });
         }
