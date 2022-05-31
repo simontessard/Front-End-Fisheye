@@ -189,7 +189,11 @@ article {
 }
 
 .gallery_info h3 {
+    max-width: 300px;
     margin-block: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .media_likeInfo {
