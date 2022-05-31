@@ -96,6 +96,46 @@ async function displayPhotographer(photographer) {
 
 async function displayMedias(medias, photoGraphPrice) {
     const portfolio = document.querySelector('#main');
+
+    const sortByContainer = document.createElement('div');
+    sortByContainer.setAttribute("class", 'gallery-sortby');
+
+    const sortByText = document.createElement('p');
+    sortByText.textContent = 'Trier par';
+
+    const sortByDropdown = document.createElement('div');
+    sortByDropdown.setAttribute("class", 'sortby-dropdown');
+
+    sortByDropdown.addEventListener('click', event => {
+        sortByDropdown.classList.toggle('active');
+    })
+
+    const sortByDropdownOption = document.createElement('div');
+    sortByDropdownOption.setAttribute("class", 'dropdown-option');
+
+    const DropdownFirstOption = document.createElement('div');
+    DropdownFirstOption.textContent = 'Popularité';
+
+    const DropdownSecondOption = document.createElement('div');
+    DropdownSecondOption.textContent = 'Date';
+    const DropdownThirdOption = document.createElement('div');
+    DropdownThirdOption.textContent = 'Titre';
+
+    sortByContainer.appendChild(sortByText);
+
+    sortByDropdownOption.appendChild(DropdownFirstOption);
+    sortByDropdownOption.appendChild(DropdownSecondOption);
+    sortByDropdownOption.appendChild(DropdownThirdOption);
+
+    sortByDropdown.appendChild(sortByDropdownOption);
+    sortByContainer.appendChild(sortByDropdown);
+
+    /* document.querySelectorAll('.dropdown-option div').forEach(item => {
+        item.addEventListener('click', event => {
+        })
+      }) */
+
+    // Elements de la galerie
     const gallery = document.createElement('div');
     gallery.setAttribute("class", 'photograph-gallery');
     const moreInfo = document.createElement('div');
@@ -105,8 +145,10 @@ async function displayMedias(medias, photoGraphPrice) {
     darkHeart.setAttribute("src", '../assets/icons/heart.svg');
     darkHeart.setAttribute("class", 'dark-heart');
 
+    gallery.appendChild(sortByContainer);
+
     mediasList = medias[0];
-    console.log(mediasList);
+    // Galerie des medias
     mediasList.forEach(async (media) => {
 
     const { date, id, likes, photographerId, price, image, title, video } = media;
@@ -172,7 +214,6 @@ async function displayMedias(medias, photoGraphPrice) {
     likeInfo.appendChild(likeHeart);
     galleryArticle.appendChild(articleInfo);
     gallery.appendChild(galleryArticle);
-    // portfolio.appendChild(sortByContainer);
     portfolio.appendChild(gallery);
     
     totalLikes = totalLikes + likes;
@@ -186,7 +227,6 @@ async function displayMedias(medias, photoGraphPrice) {
 
     // Price + all likes
     moreInfo.setAttribute("class", "photograph-moreinfo");
-
     allLikes.setAttribute("aria-label", totalLikes);
 
     dailyPrice.textContent = photoGraphPrice + '€ / jour';
