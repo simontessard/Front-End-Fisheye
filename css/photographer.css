@@ -35,7 +35,6 @@
 .gallery-sortby {
     display: flex;
     flex: 100%;
-    margin-left:100px;
     position: relative;
 }
 
@@ -46,6 +45,7 @@
     width: 150px;
     overflow: visible;
     margin-left: 100px;
+    z-index:4;
 }
 
 .sortby-dropdown::before {
@@ -94,7 +94,7 @@
     display: flex;
     gap:50px;
     flex-flow: row wrap;
-    justify-content: center;
+    margin-left: 100px;
 }
 
 .photograph-gallery article img, .photograph-gallery article video{
