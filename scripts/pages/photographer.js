@@ -172,15 +172,24 @@ async function displayMedias(medias, photoGraphPrice) {
         galleryArticle.appendChild(mediaImg);
 
         mediaImg.addEventListener("click", function() {
-            displayModalMedia(mediasList, id);
+            displayModalMedia(mediasList, id, 'image');
         });
     }
     else {
+        const videoIcon = document.createElement('img');
+        videoIcon.setAttribute("src", '../assets/icons/video.svg');
+        videoIcon.setAttribute("class", 'gallery_video-icon');
+
         source = document.createElement('source');
         source.src = `assets/photos/${galleryFile}/${video}`;
         mediaVideo.appendChild(source);
         mediaVideo.setAttribute("class", 'gallery_img');
         galleryArticle.appendChild(mediaVideo);
+        galleryArticle.appendChild(videoIcon);
+
+        mediaVideo.addEventListener("click", function() {
+            displayModalMedia(mediasList, id, 'video');
+        });
     }
     // Info
     articleInfo.setAttribute("class", 'gallery_info');
@@ -233,7 +242,7 @@ async function displayMedias(medias, photoGraphPrice) {
     dailyPrice.setAttribute("aria-label", photoGraphPrice);
 };
 
-async function displayModalMedia(mediasList, id) {
+async function displayModalMedia(mediasList, id, type) {
     media = mediasList.filter(item => item.id == id)[0];
 
     // Récupération de l'index du media cliqué
@@ -248,9 +257,25 @@ async function displayModalMedia(mediasList, id) {
     modalMedia.setAttribute("class", "modal-media");
     const modalContainer = document.createElement('div');
     modalContainer.setAttribute("class", "modal-container");
-    const mediaPicture = document.createElement('img');
-    mediaPicture.setAttribute("src", picture);
-    mediaPicture.setAttribute('class','mediaModal-picture');
+
+    // Cas où le media est une image
+    if (type == 'image') {
+        const mediaPicture = document.createElement('img');
+        mediaPicture.setAttribute("src", picture);
+        mediaPicture.setAttribute('class','mediaModal-picture');
+        modalContainer.appendChild(mediaPicture);
+    }
+    // Cas où le media est une vidéo
+    if (type == 'video') {
+        const mediaVideo = document.createElement('video');
+        source = document.createElement('source');
+        source.src = `assets/photos/${galleryFile}/${media.video}`;
+        mediaVideo.setAttribute("controls","controls");   
+        mediaVideo.appendChild(source);
+        mediaVideo.setAttribute("class", 'mediaModal-picture');
+        modalContainer.appendChild(mediaVideo);
+    }
+
     const titlePicture = document.createElement('p');
     titlePicture.textContent = media.title;
     titlePicture.setAttribute('class','second-title');
@@ -264,7 +289,6 @@ async function displayModalMedia(mediasList, id) {
     nextButton.setAttribute("src", '../assets/icons/nextarrow.svg');
     nextButton.setAttribute('class','mediaModal-nextButton');
 
-    modalContainer.appendChild(mediaPicture);
     modalContainer.appendChild(titlePicture);
     modalContainer.appendChild(closeButton);
     modalContainer.appendChild(previousButton);
@@ -280,12 +304,24 @@ async function displayModalMedia(mediasList, id) {
     previousButton.addEventListener("click", function() {
         modalMedia.style.display="none";
         previousMedia = mediasList[index-1];
-        displayModalMedia(mediasList, previousMedia.id)
+        if (previousMedia.hasOwnProperty('image')) {
+            type = 'image';
+        }
+        else {
+            type = 'video';
+        }
+        displayModalMedia(mediasList, previousMedia.id, type)
     });
     nextButton.addEventListener("click", function() {
         modalMedia.style.display="none";
         nextMedia = mediasList[index+1];
-        displayModalMedia(mediasList, nextMedia.id)
+        if (nextMedia.hasOwnProperty('image')) {
+            type = 'image';
+        }
+        else {
+            type = 'video';
+        }
+        displayModalMedia(mediasList, nextMedia.id, type)
     });
 }
 

@@ -97,8 +97,20 @@
     justify-content: center;
 }
 
-.photograph-gallery article img{
+.photograph-gallery article img, .photograph-gallery article video{
     cursor: pointer;
+}
+
+.gallery_video-icon {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    height: 30px;
+    width: 30px;
+}
+
+article {
+    position: relative;
 }
 
 .photograph-title {
@@ -126,6 +138,7 @@
     right: 0;
     margin-right: 3%;
     padding-inline: 40px;
+    z-index: 2;
 }
 
 .dark-heart {
