@@ -11,10 +11,8 @@ link.appendChild(logo);
 totalLikes = 0;
 
 async function getPhotographer() {
-
     const URL = (window.location).href; // You can also use document.URL
     const photographerID = URL.substring(URL.lastIndexOf('=') + 1);
-
     // Données récupérées grâce au fichier JSON
     return fetch('../data/photographers.json')
     .then(response => {
@@ -48,6 +46,7 @@ async function getPhotographerMedia(photographerID) {
     });
 }
 
+// Affichage de l'entête d'un photographe sur sa page perso
 async function displayPhotographer(photographer) {
     const photographersHeader = document.querySelector(".photograph-header");
 
@@ -86,18 +85,18 @@ async function displayPhotographer(photographer) {
             contactButton.setAttribute("aria-label", 'Contact Me');
 
             photographerInfo.appendChild(photographerName);
-            photographerMoreInfo.appendChild(location);
-            photographerMoreInfo.appendChild(slogan);
+            photographerMoreInfo.append(location, slogan);
             photographerInfo.appendChild(photographerMoreInfo);
 
-            photographersHeader.appendChild(photographerInfo);
-            photographersHeader.appendChild(img);
+            photographersHeader.append(photographerInfo, img);
     }
 };
 
+// Affichage de la galerie photo/vidéo
 async function displayMedias(medias, photoGraphPrice) {
     const portfolio = document.querySelector('#main');
 
+    // Bouton de liste déroulante
     const sortByContainer = document.createElement('div');
     sortByContainer.setAttribute("class", 'gallery-sortby');
 
@@ -117,17 +116,16 @@ async function displayMedias(medias, photoGraphPrice) {
 
     const DropdownFirstOption = document.createElement('div');
     DropdownFirstOption.textContent = 'Popularité';
-
     const DropdownSecondOption = document.createElement('div');
     DropdownSecondOption.textContent = 'Date';
     const DropdownThirdOption = document.createElement('div');
     DropdownThirdOption.textContent = 'Titre';
 
+    // Texte Trier Par
     sortByContainer.appendChild(sortByText);
 
-    sortByDropdownOption.appendChild(DropdownFirstOption);
-    sortByDropdownOption.appendChild(DropdownSecondOption);
-    sortByDropdownOption.appendChild(DropdownThirdOption);
+    // Les options de la liste
+    sortByDropdownOption.append(DropdownFirstOption, DropdownSecondOption, DropdownThirdOption);
 
     sortByDropdown.appendChild(sortByDropdownOption);
     sortByContainer.appendChild(sortByDropdown);
@@ -151,6 +149,7 @@ async function displayMedias(medias, photoGraphPrice) {
 
     mediasList = medias[0];
 
+    // Gérer le tabindex du focus
     let tabindex = 8;
 
     // Galerie des medias
@@ -195,8 +194,7 @@ async function displayMedias(medias, photoGraphPrice) {
         mediaVideo.setAttribute('tabindex',tabindex);
         tabindex++;
 
-        galleryArticle.appendChild(mediaVideo);
-        galleryArticle.appendChild(videoIcon);
+        galleryArticle.append(mediaVideo, videoIcon);
 
         mediaVideo.addEventListener("click", function() {
             displayModalMedia(mediasList, id, 'video');
@@ -232,10 +230,8 @@ async function displayMedias(medias, photoGraphPrice) {
         }
     });
 
-    articleInfo.appendChild(mediaTitle);
-    articleInfo.appendChild(likeInfo);
-    likeInfo.appendChild(mediaLikes);
-    likeInfo.appendChild(likeHeart);
+    articleInfo.append(mediaTitle, likeInfo);
+    likeInfo.append(mediaLikes, likeHeart);
     galleryArticle.appendChild(articleInfo);
     gallery.appendChild(galleryArticle);
     portfolio.appendChild(gallery);
@@ -244,9 +240,8 @@ async function displayMedias(medias, photoGraphPrice) {
     allLikes.textContent = totalLikes;
     });
 
-    moreInfo.appendChild(allLikes);
-    moreInfo.appendChild(darkHeart);
-    moreInfo.appendChild(dailyPrice);
+    moreInfo.append(allLikes, darkHeart, dailyPrice);
+
     portfolio.appendChild(moreInfo);
 
     // Price + all likes
@@ -258,6 +253,7 @@ async function displayMedias(medias, photoGraphPrice) {
     dailyPrice.setAttribute("aria-label", photoGraphPrice);
 };
 
+// Affichage de la modal de media
 async function displayModalMedia(mediasList, id, type) {
     media = mediasList.filter(item => item.id == id)[0];
 
@@ -305,10 +301,8 @@ async function displayModalMedia(mediasList, id, type) {
     nextButton.setAttribute("src", '../assets/icons/nextarrow.svg');
     nextButton.setAttribute('class','mediaModal-nextButton');
 
-    modalContainer.appendChild(titlePicture);
-    modalContainer.appendChild(closeButton);
-    modalContainer.appendChild(previousButton);
-    modalContainer.appendChild(nextButton);
+    modalContainer.append(titlePicture, closeButton, previousButton, nextButton);
+
     modalMedia.appendChild(modalContainer);
     portfolio.appendChild(modalMedia);
 
@@ -341,9 +335,11 @@ async function displayModalMedia(mediasList, id, type) {
     });
 }
 
+// Initialisation d'un photographe
 async function initPhotographer() {
-    // Récupère les datas des photographes
+    // Récupère les datas du photographe
     const { photographer } = await getPhotographer() || {};
+    // Récupère les datas des medias du photographe
     const { medias } = await getPhotographerMedia(photographer[0].id) || {};
 
     const photoGraphPrice = photographer[0].price;
@@ -356,6 +352,7 @@ async function initPhotographer() {
     }
 };
 
+// Récupère les données d'un photographe grâce à son ID
 async function getPhotographerNameById(id) {
 
     return fetch('../data/photographers.json')
