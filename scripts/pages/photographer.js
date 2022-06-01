@@ -83,6 +83,7 @@ async function displayPhotographer(photographer) {
 
             const contactButton = document.querySelector('.contact_button');
             contactButton.setAttribute('tabindex','4');
+            contactButton.setAttribute("aria-label", 'Contact Me');
 
             photographerInfo.appendChild(photographerName);
             photographerMoreInfo.appendChild(location);
@@ -102,6 +103,7 @@ async function displayMedias(medias, photoGraphPrice) {
 
     const sortByText = document.createElement('p');
     sortByText.textContent = 'Trier par';
+    sortByText.setAttribute('tabindex','7');
 
     const sortByDropdown = document.createElement('div');
     sortByDropdown.setAttribute("class", 'sortby-dropdown');
@@ -148,6 +150,9 @@ async function displayMedias(medias, photoGraphPrice) {
     gallery.appendChild(sortByContainer);
 
     mediasList = medias[0];
+
+    let tabindex = 8;
+
     // Galerie des medias
     mediasList.forEach(async (media) => {
 
@@ -167,8 +172,11 @@ async function displayMedias(medias, photoGraphPrice) {
     // Image de l'article de la galerie
     if (image != null) {
         mediaImg.setAttribute("src", picture);
-        mediaImg.setAttribute("alt", title)
+        mediaImg.setAttribute("alt", title + 'closeup view')
         mediaImg.setAttribute("class", 'gallery_img');
+        mediaImg.setAttribute('tabindex',tabindex);
+        tabindex++;
+
         galleryArticle.appendChild(mediaImg);
 
         mediaImg.addEventListener("click", function() {
@@ -184,6 +192,9 @@ async function displayMedias(medias, photoGraphPrice) {
         source.src = `assets/photos/${galleryFile}/${video}`;
         mediaVideo.appendChild(source);
         mediaVideo.setAttribute("class", 'gallery_img');
+        mediaVideo.setAttribute('tabindex',tabindex);
+        tabindex++;
+
         galleryArticle.appendChild(mediaVideo);
         galleryArticle.appendChild(videoIcon);
 
@@ -198,14 +209,18 @@ async function displayMedias(medias, photoGraphPrice) {
     mediaTitle.textContent = title;
     mediaTitle.setAttribute("aria-label", title);
     mediaTitle.setAttribute("class", "media_title");
+    mediaTitle.setAttribute('tabindex',tabindex);
+    tabindex++;
 
     // Likes de l'article de la galerie
     mediaLikes.textContent = likes;
     mediaLikes.setAttribute("aria-label", likes);
     mediaLikes.setAttribute("class", "media_likes");
+    mediaLikes.setAttribute('tabindex',tabindex);
 
     // Logo like
     likeHeart.setAttribute("src", '../assets/icons/heart.svg');
+    likeHeart.setAttribute("alt", 'likes');
     likeInfo.setAttribute("class", "media_likeInfo");
     likeInfo.addEventListener('click', function(event) {
         newLikes = parseInt(mediaLikes.textContent);
@@ -237,6 +252,7 @@ async function displayMedias(medias, photoGraphPrice) {
     // Price + all likes
     moreInfo.setAttribute("class", "photograph-moreinfo");
     allLikes.setAttribute("aria-label", totalLikes);
+    allLikes.setAttribute("tabindex", '6');
 
     dailyPrice.textContent = photoGraphPrice + '€ / jour';
     dailyPrice.setAttribute("aria-label", photoGraphPrice);
