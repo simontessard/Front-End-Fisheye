@@ -28,14 +28,15 @@
     font-size: 18px;
     line-height: 23px;
     color: #000000;
-    margin-right: 30px;
     position: relative;
+    top: 40%;
 }
 
 .gallery-sortby {
     display: flex;
     flex: 100%;
     position: relative;
+    padding-bottom: 10px;
 }
 
 .sortby-dropdown {
@@ -44,7 +45,7 @@
     position: absolute;
     width: 150px;
     overflow: visible;
-    margin-left: 100px;
+    margin-left: 90px;
     z-index:4;
 }
 
@@ -179,7 +180,7 @@ article {
 .gallery_img {
     border-radius: 5px;
     height: 300px;
-    width: 350px;
+    width: 400px;
     object-fit: cover;
 }
 
@@ -190,7 +191,7 @@ article {
 }
 
 .gallery_info h3 {
-    max-width: 300px;
+    max-width: 350px;
     margin-block: 10px;
     white-space: nowrap;
     overflow: hidden;
