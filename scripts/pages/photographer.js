@@ -179,12 +179,18 @@ async function displayMedias(medias, photoGraphPrice) {
         mediaImg.setAttribute("alt", title + 'closeup view')
         mediaImg.setAttribute("class", 'gallery_img');
         mediaImg.setAttribute('tabindex',tabindex);
+        mediaImg.setAttribute('role','link');
         tabindex++;
 
         galleryArticle.appendChild(mediaImg);
 
         mediaImg.addEventListener("click", function() {
             displayModalMedia(mediasList, id, 'image');
+        });
+        mediaImg.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                displayModalMedia(mediasList, id, 'image');
+            }
         });
     }
     else {
