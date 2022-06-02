@@ -285,7 +285,7 @@ async function displayModalMedia(mediasList, id, type) {
     // Cas où le media est une vidéo
     if (type == 'video') {
         const mediaVideo = document.createElement('video');
-        source = document.createElement('source');
+        let source = document.createElement('source');
         source.src = `assets/photos/${galleryFile}/${media.video}`;
         mediaVideo.setAttribute("controls","controls");   
         mediaVideo.appendChild(source);
