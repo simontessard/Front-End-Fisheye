@@ -1,3 +1,4 @@
+import { displayInputs, displayModal, closeModal } from "../utils/contactForm.js";
 // Ajout d'un lien vers l'accueil sur le logo
 const logo = document.querySelector(".logo");
 const header = document.querySelector('header');
@@ -8,7 +9,7 @@ link.setAttribute('tabindex','1');
 link.setAttribute('href','index.html');
 link.appendChild(logo);
 
-totalLikes = 0;
+let totalLikes = 0;
 
 async function getPhotographer() {
     const URL = (window.location).href; // You can also use document.URL
@@ -84,6 +85,10 @@ async function displayPhotographer(photographer) {
             contactButton.setAttribute('tabindex','4');
             contactButton.setAttribute("aria-label", 'Contact Me');
 
+            contactButton.addEventListener('click', event => {
+                displayModal();
+            })
+
             photographerInfo.appendChild(photographerName);
             photographerMoreInfo.append(location, slogan);
             photographerInfo.appendChild(photographerMoreInfo);
@@ -147,7 +152,7 @@ async function displayMedias(medias, photoGraphPrice) {
 
     gallery.appendChild(sortByContainer);
 
-    mediasList = medias[0];
+    let mediasList = medias[0];
 
     // Gérer le tabindex du focus
     let tabindex = 8;
@@ -187,7 +192,7 @@ async function displayMedias(medias, photoGraphPrice) {
         videoIcon.setAttribute("src", '../assets/icons/video.svg');
         videoIcon.setAttribute("class", 'gallery_video-icon');
 
-        source = document.createElement('source');
+        let source = document.createElement('source');
         source.src = `assets/photos/${galleryFile}/${video}`;
         mediaVideo.appendChild(source);
         mediaVideo.setAttribute("class", 'gallery_img');
@@ -255,10 +260,10 @@ async function displayMedias(medias, photoGraphPrice) {
 
 // Affichage de la modal de media
 async function displayModalMedia(mediasList, id, type) {
-    media = mediasList.filter(item => item.id == id)[0];
+    let media = mediasList.filter(item => item.id == id)[0];
 
     // Récupération de l'index du media cliqué
-    index = mediasList.indexOf(media);
+    let index = mediasList.indexOf(media);
 
     const galleryFile = await getPhotographerNameById(media.photographerId);
     const picture = `assets/photos/${galleryFile}/${media.image}`;
@@ -313,7 +318,7 @@ async function displayModalMedia(mediasList, id, type) {
     });
     previousButton.addEventListener("click", function() {
         modalMedia.style.display="none";
-        previousMedia = mediasList[index-1];
+        let previousMedia = mediasList[index-1];
         if (previousMedia.hasOwnProperty('image')) {
             type = 'image';
         }
@@ -324,7 +329,7 @@ async function displayModalMedia(mediasList, id, type) {
     });
     nextButton.addEventListener("click", function() {
         modalMedia.style.display="none";
-        nextMedia = mediasList[index+1];
+        let nextMedia = mediasList[index+1];
         if (nextMedia.hasOwnProperty('image')) {
             type = 'image';
         }
@@ -349,6 +354,7 @@ async function initPhotographer() {
     if (typeof photographer !== 'undefined') {
         displayPhotographer(photographer);
         displayMedias(medias, photoGraphPrice);
+        displayInputs();
     }
 };
 
@@ -378,3 +384,5 @@ async function getPhotographerNameById(id) {
 }
 
 initPhotographer();
+
+export default displayModal;
