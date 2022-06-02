@@ -274,12 +274,14 @@ async function displayModalMedia(mediasList, id, type) {
     modalMedia.setAttribute("class", "modal-media");
     const modalContainer = document.createElement('div');
     modalContainer.setAttribute("class", "modal-container");
+    modalContainer.setAttribute("aria-label", 'Image closeup view');
 
     // Cas où le media est une image
     if (type == 'image') {
         const mediaPicture = document.createElement('img');
         mediaPicture.setAttribute("src", picture);
         mediaPicture.setAttribute('class','mediaModal-picture');
+        mediaPicture.setAttribute("alt", media.title);
         modalContainer.appendChild(mediaPicture);
     }
     // Cas où le media est une vidéo
@@ -292,19 +294,21 @@ async function displayModalMedia(mediasList, id, type) {
         mediaVideo.setAttribute("class", 'mediaModal-picture');
         modalContainer.appendChild(mediaVideo);
     }
-
     const titlePicture = document.createElement('p');
     titlePicture.textContent = media.title;
     titlePicture.setAttribute('class','second-title');
     const closeButton = document.createElement('img');
     closeButton.setAttribute("src", '../assets/icons/redcross.svg');
     closeButton.setAttribute('class','mediaModal-closeButton');
+    closeButton.setAttribute("aria-label", 'Close dialog');
     const previousButton = document.createElement('img');
     previousButton.setAttribute("src", '../assets/icons/previousarrow.svg');
     previousButton.setAttribute('class','mediaModal-previousButton');
+    previousButton.setAttribute("aria-label", 'Previous image');
     const nextButton = document.createElement('img');
     nextButton.setAttribute("src", '../assets/icons/nextarrow.svg');
     nextButton.setAttribute('class','mediaModal-nextButton');
+    nextButton.setAttribute("aria-label", 'Next image');
 
     modalContainer.append(titlePicture, closeButton, previousButton, nextButton);
 
