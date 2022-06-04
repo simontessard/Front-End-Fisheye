@@ -226,18 +226,31 @@ async function displayMedias(medias, photoGraphPrice) {
     mediaLikes.setAttribute("aria-label", likes);
     mediaLikes.setAttribute("class", "media_likes");
     mediaLikes.setAttribute('tabindex',tabindex);
+    tabindex++;
 
     // Logo like
     likeHeart.setAttribute("src", '../assets/icons/heart.svg');
     likeHeart.setAttribute("alt", 'likes');
+    likeHeart.setAttribute('tabindex',tabindex);
     likeInfo.setAttribute("class", "media_likeInfo");
     likeInfo.addEventListener('click', function(event) {
-        newLikes = parseInt(mediaLikes.textContent);
+        let newLikes = parseInt(mediaLikes.textContent);
         if (newLikes != likes + 1) {
             mediaLikes.textContent = newLikes + 1;
         }
         else {
             mediaLikes.textContent = newLikes -1;
+        }
+    });
+    likeHeart.addEventListener('keypress', function(event) {
+        if (event.key === "Enter") {
+            let newLikes = parseInt(mediaLikes.textContent);
+            if (newLikes != likes + 1) {
+            mediaLikes.textContent = newLikes + 1;
+            }
+            else {
+            mediaLikes.textContent = newLikes -1;
+            }
         }
     });
 
