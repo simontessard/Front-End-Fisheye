@@ -39,7 +39,13 @@ function displayInputs() {
     const messageInput = document.createElement('input');
     messageInput.style.height = '200px';
 
+    const submitButton = document.createElement('button');
+    submitButton.textContent = 'Envoyer';
+    submitButton.setAttribute('class', 'contact_button');
+    submitButton.setAttribute('type', 'submit');
+
     form.append(nomLabel, nomInput, emailLabel, emailInput, messageLabel, messageInput);
+    document.querySelector('form').appendChild(submitButton);
 
     addFocus();
 }
@@ -52,6 +58,8 @@ function addFocus() {
     const firstFocusableElement = modal.querySelectorAll(focusableElements)[0]; // get first element to be focused inside modal
     const focusableContent = modal.querySelectorAll(focusableElements);
     const lastFocusableElement = focusableContent[focusableContent.length - 1]; // get last element to be focused inside modal
+
+    firstFocusableElement.focus();
 
     document.addEventListener('keydown', function (e) {
         let isTabPressed = e.key === 'Tab' || e.keyCode === 9;
@@ -72,8 +80,7 @@ function addFocus() {
             }
         }
     });
-
-    firstFocusableElement.focus();
+    activeElement.blur();
 }
 /* document.onreadystatechange = function () {
     if (document.readyState === 'interactive') {
