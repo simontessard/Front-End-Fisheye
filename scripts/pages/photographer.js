@@ -76,18 +76,18 @@ async function displayPhotographer(photographer) {
             const slogan = document.createElement('p');
             slogan.textContent = tagline;
 
-            const img = document.createElement('img');
-            img.setAttribute("src", picture);
+            const photographerPortrait = document.createElement('img');
+            photographerPortrait.setAttribute("src", picture);
             // ALT pour faire une description de l'image
-            img.setAttribute("alt", name + ' portrait')
-            img.setAttribute("class", 'photographer_img');
-            img.setAttribute('tabindex','0');
-            img.setAttribute('role','img');
-            img.style.order = -1 ;
+            photographerPortrait.setAttribute("alt", name + ' portrait')
+            photographerPortrait.setAttribute("class", 'photographer_img');
+            photographerPortrait.setAttribute('tabindex','0');
+            photographerPortrait.setAttribute('role','img');
 
             const contactButton = document.querySelector('.contact_button');
             contactButton.setAttribute('tabindex','0');
             contactButton.setAttribute("aria-label", 'Contactez-moi');
+            contactButton.textContent = 'Contactez-moi';
 
             contactButton.addEventListener('click', event => {
                 displayModal();
@@ -97,7 +97,7 @@ async function displayPhotographer(photographer) {
             photographerMoreInfo.append(location, slogan);
             photographerInfo.appendChild(photographerMoreInfo);
 
-            photographersHeader.append(photographerInfo, img);
+            photographersHeader.append(photographerInfo, contactButton, photographerPortrait);
     }
 };
 

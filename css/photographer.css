@@ -28,7 +28,6 @@
     margin: 0 100px 50px;
     display: flex;
     justify-content: space-between;
-    flex-flow: row-reverse;
     padding-inline: 5%;
     align-items: center;
 }
