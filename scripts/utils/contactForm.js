@@ -1,5 +1,4 @@
 
-
 function displayModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "block";
@@ -11,11 +10,16 @@ function closeModal() {
 }
 
 function displayInputs() {
+    const contactMeText = document.querySelector('.modal h2');
+
+    const modal = document.getElementById("contact_modal");
+    modal.setAttribute('role','dialog');
+    modal.setAttribute('aria-labelledby', contactMeText.textContent);
+
     const form = document.querySelector('form div');
 
     const namePhotographer = document.querySelector('h1').innerText;
 
-    const contactMeText = document.querySelector('.modal h2');
     const jump = document.createElement('br');
     contactMeText.appendChild(jump);
 
@@ -26,25 +30,40 @@ function displayInputs() {
         closeModal();
     })
 
+    const prenomLabel = document.createElement('label');
+    prenomLabel.setAttribute('for', 'firstName');
+    prenomLabel.textContent = 'Prénom';
+    const prenomInput = document.createElement('input');
+    prenomInput.setAttribute('id', 'firstName');
+    prenomInput.setAttribute('type', 'text');
+
     const nomLabel = document.createElement('label');
+    nomLabel.setAttribute('for', 'lastName');
     nomLabel.textContent = 'Nom';
     const nomInput = document.createElement('input');
+    nomInput.setAttribute('id', 'lastName');
+    nomInput.setAttribute('type', 'text');
 
     const emailLabel = document.createElement('label');
+    emailLabel.setAttribute('for', 'email');
     emailLabel.textContent = 'Email';
     const emailInput = document.createElement('input');
+    emailInput.setAttribute('id', 'email');
+    emailInput.setAttribute('type', 'email');
 
     const messageLabel = document.createElement('label');
+    messageLabel.setAttribute('for', 'message');
     messageLabel.textContent = 'Votre message';
     const messageInput = document.createElement('input');
+    messageInput.setAttribute('id', 'message');
     messageInput.style.height = '200px';
 
-    const submitButton = document.createElement('button');
-    submitButton.textContent = 'Envoyer';
+    const submitButton = document.createElement('input');
+    submitButton.setAttribute('value', 'Envoyer');
     submitButton.setAttribute('class', 'contact_button');
     submitButton.setAttribute('type', 'submit');
 
-    form.append(nomLabel, nomInput, emailLabel, emailInput, messageLabel, messageInput);
+    form.append(prenomLabel, prenomInput, nomLabel, nomInput, emailLabel, emailInput, messageLabel, messageInput);
     document.querySelector('form').appendChild(submitButton);
 
     addFocus();
@@ -80,7 +99,6 @@ function addFocus() {
             }
         }
     });
-    activeElement.blur();
 }
 /* document.onreadystatechange = function () {
     if (document.readyState === 'interactive') {
