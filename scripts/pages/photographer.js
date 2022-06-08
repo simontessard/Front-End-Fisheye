@@ -22,8 +22,6 @@ async function getPhotographer() {
         return response.json();})
     .then(data => {
 
-        console.log(data);
-
     // Affiche les données du photographe grâce à l'id recupérée dans l'URL
     console.log(data["photographers"].find(item => item.id == photographerID));
     // Retourner les données du photographe en question
@@ -160,9 +158,6 @@ async function displayMedias(medias, photoGraphPrice) {
     gallery.appendChild(sortByContainer);
 
     let mediasList = medias[0];
-
-    // Gérer le tabindex du focus
-    let tabindex = 0;
 
     // Galerie des medias
     mediasList.forEach(async (media) => {
@@ -409,13 +404,11 @@ async function getPhotographerNameById(id) {
                 name = name.substring(0, name.indexOf(' ')).toLowerCase();
                 // Retire le tiret si il y en un
                 name = name.replace(/-/g, "");
-
                 return name;
             }
             return null;
         });
 }
-
 initPhotographer();
 
 export default displayModal;

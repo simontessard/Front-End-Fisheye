@@ -1,4 +1,3 @@
-
 function displayModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "block";
@@ -27,7 +26,6 @@ function initializeModal() {
 
     const jump = document.createElement('br');
     contactMeText.appendChild(jump);
-
     jump.after(namePhotographer);
 
     const closeButton = document.querySelector('.modal-dialog img');
@@ -73,7 +71,6 @@ function initializeModal() {
 
     form.append(prenomLabel, prenomInput, nomLabel, nomInput, emailLabel, emailInput, messageLabel, messageInput);
     document.querySelector('form').appendChild(submitButton);
-
 }
 
 async function addFocus() {
@@ -114,5 +111,4 @@ async function addFocus() {
         initializeModal();
     }
 } */
-
 export { displayModal, closeModal, initializeModal, addFocus }
