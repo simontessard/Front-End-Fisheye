@@ -311,7 +311,7 @@ article {
     object-fit: cover;
 }
 
-.modal {
+.modal-dialog {
     border-radius: 5px;
     background-color: #DB8876;
     width: 50%;
@@ -320,18 +320,19 @@ article {
     align-items: center;
     padding: 35px;
     margin: auto;
+    margin-top: 20px;
 }
 
-.modal header {
+.modal-dialog header {
     justify-content: space-between;
     width: 100%;
 }
 
-.modal header img {
+.modal-dialog header img {
     cursor: pointer;
 }
 
-.modal header h2 {
+.modal-dialog header h2 {
     font-size: 64px;
     font-weight: normal;
     text-align: center;

@@ -9,12 +9,17 @@ function closeModal() {
     modal.style.display = "none";
 }
 
-function displayInputs() {
-    const contactMeText = document.querySelector('.modal h2');
+function initializeModal() {
+    const contactMeText = document.querySelector('.modal-dialog h2');
+
+    const modalDialog = document.querySelector('.modal-dialog');
+    modalDialog.setAttribute('role', 'document');
 
     const modal = document.getElementById("contact_modal");
-    modal.setAttribute('role','dialog');
+    modal.setAttribute('role', 'dialog');
     modal.setAttribute('aria-labelledby', contactMeText.textContent);
+    modal.setAttribute('tabindex', '0');
+    modal.setAttribute('aria-hidden', 'true');
 
     const form = document.querySelector('form div');
 
@@ -25,7 +30,10 @@ function displayInputs() {
 
     jump.after(namePhotographer);
 
-    const closeButton = document.querySelector('.modal img');
+    const closeButton = document.querySelector('.modal-dialog img');
+    closeButton.setAttribute('aria-label', 'Close');
+    closeButton.setAttribute('tabindex', '0');
+
     closeButton.addEventListener('click', event => {
         closeModal();
     })
@@ -66,19 +74,18 @@ function displayInputs() {
     form.append(prenomLabel, prenomInput, nomLabel, nomInput, emailLabel, emailInput, messageLabel, messageInput);
     document.querySelector('form').appendChild(submitButton);
 
-    addFocus();
 }
 
-function addFocus() {
+async function addFocus() {
     // add all the elements inside modal which you want to make focusable
-    const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    const focusableElements = 'img, button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
     const modal = document.querySelector('#contact_modal'); // select the modal by it's id
 
     const firstFocusableElement = modal.querySelectorAll(focusableElements)[0]; // get first element to be focused inside modal
     const focusableContent = modal.querySelectorAll(focusableElements);
     const lastFocusableElement = focusableContent[focusableContent.length - 1]; // get last element to be focused inside modal
 
-    firstFocusableElement.focus();
+    console.log(focusableContent);
 
     document.addEventListener('keydown', function (e) {
         let isTabPressed = e.key === 'Tab' || e.keyCode === 9;
@@ -99,11 +106,13 @@ function addFocus() {
             }
         }
     });
+
+    firstFocusableElement.focus();
 }
 /* document.onreadystatechange = function () {
     if (document.readyState === 'interactive') {
-        displayInputs();
+        initializeModal();
     }
 } */
 
-export { displayModal, closeModal, displayInputs }
+export { displayModal, closeModal, initializeModal, addFocus }

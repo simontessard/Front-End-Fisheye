@@ -1,4 +1,4 @@
-import { displayInputs, displayModal, closeModal } from "../utils/contactForm.js";
+import { initializeModal, displayModal, closeModal, addFocus } from "../utils/contactForm.js";
 
 // Ajout d'un lien vers l'accueil sur le logo
 const logo = document.querySelector(".logo");
@@ -91,6 +91,7 @@ async function displayPhotographer(photographer) {
 
             contactButton.addEventListener('click', event => {
                 displayModal();
+                addFocus();
             })
 
             photographerInfo.appendChild(photographerName);
@@ -386,7 +387,7 @@ async function initPhotographer() {
     if (typeof photographer !== 'undefined') {
         displayPhotographer(photographer);
         displayMedias(medias, photoGraphPrice);
-        displayInputs();
+        initializeModal();
     }
 };
 
