@@ -74,7 +74,6 @@ function addFocus() {
     });
 
     firstFocusableElement.focus();
-    document.activeElement.blur();
 }
 /* document.onreadystatechange = function () {
     if (document.readyState === 'interactive') {

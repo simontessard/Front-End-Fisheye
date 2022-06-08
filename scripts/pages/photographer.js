@@ -1,11 +1,12 @@
 import { displayInputs, displayModal, closeModal } from "../utils/contactForm.js";
+
 // Ajout d'un lien vers l'accueil sur le logo
 const logo = document.querySelector(".logo");
 const header = document.querySelector('header');
 const link = document.createElement('a')
 header.insertBefore(link, logo);
-link.setAttribute('alt','Fisheye Home page');
-link.setAttribute('tabindex','1');
+logo.setAttribute('alt','Fisheye Home page');
+link.setAttribute('tabindex','0');
 link.setAttribute('href','index.html');
 link.appendChild(logo);
 
@@ -61,10 +62,12 @@ async function displayPhotographer(photographer) {
             const photographerName = document.createElement('h1');
             photographerName.textContent = name;
             photographerName.setAttribute('class','photograph-title');
-            photographerName.setAttribute('tabindex','2');
+            photographerName.setAttribute('tabindex','0');
+            photographerName.setAttribute('role','heading');
 
             const photographerMoreInfo = document.createElement('div');
-            photographerMoreInfo.setAttribute('tabindex','3');
+            photographerMoreInfo.setAttribute('tabindex','0');
+            photographerMoreInfo.setAttribute('role','contentinfo');
 
             const location = document.createElement('h2');
             location.textContent = city + ', ' + country;
@@ -78,12 +81,13 @@ async function displayPhotographer(photographer) {
             // ALT pour faire une description de l'image
             img.setAttribute("alt", name + ' portrait')
             img.setAttribute("class", 'photographer_img');
-            img.setAttribute('tabindex','5');
+            img.setAttribute('tabindex','0');
+            img.setAttribute('role','img');
             img.style.order = -1 ;
 
             const contactButton = document.querySelector('.contact_button');
-            contactButton.setAttribute('tabindex','4');
-            contactButton.setAttribute("aria-label", 'Contact Me');
+            contactButton.setAttribute('tabindex','0');
+            contactButton.setAttribute("aria-label", 'Contactez-moi');
 
             contactButton.addEventListener('click', event => {
                 displayModal();
@@ -107,7 +111,8 @@ async function displayMedias(medias, photoGraphPrice) {
 
     const sortByText = document.createElement('p');
     sortByText.textContent = 'Trier par';
-    sortByText.setAttribute('tabindex','7');
+    sortByText.setAttribute('tabindex','0');
+    sortByText.setAttribute('role','heading');
 
     const sortByDropdown = document.createElement('div');
     sortByDropdown.setAttribute("class", 'sortby-dropdown');
@@ -149,13 +154,14 @@ async function displayMedias(medias, photoGraphPrice) {
     const darkHeart = document.createElement('img');
     darkHeart.setAttribute("src", '../assets/icons/heart.svg');
     darkHeart.setAttribute("class", 'dark-heart');
+    darkHeart.setAttribute("alt", 'Coeur rouge');
 
     gallery.appendChild(sortByContainer);
 
     let mediasList = medias[0];
 
     // Gérer le tabindex du focus
-    let tabindex = 8;
+    let tabindex = 0;
 
     // Galerie des medias
     mediasList.forEach(async (media) => {
@@ -178,9 +184,8 @@ async function displayMedias(medias, photoGraphPrice) {
         mediaImg.setAttribute("src", picture);
         mediaImg.setAttribute("alt", title + 'closeup view')
         mediaImg.setAttribute("class", 'gallery_img');
-        mediaImg.setAttribute('tabindex',tabindex);
-        mediaImg.setAttribute('role','link');
-        tabindex++;
+        mediaImg.setAttribute('tabindex','0');
+        mediaImg.setAttribute('role','img');
 
         galleryArticle.appendChild(mediaImg);
 
@@ -197,13 +202,14 @@ async function displayMedias(medias, photoGraphPrice) {
         const videoIcon = document.createElement('img');
         videoIcon.setAttribute("src", '../assets/icons/video.svg');
         videoIcon.setAttribute("class", 'gallery_video-icon');
+        videoIcon.setAttribute("alt", 'Black video player');
 
         let source = document.createElement('source');
         source.src = `assets/photos/${galleryFile}/${video}`;
         mediaVideo.appendChild(source);
         mediaVideo.setAttribute("class", 'gallery_img');
-        mediaVideo.setAttribute('tabindex',tabindex);
-        tabindex++;
+        mediaVideo.setAttribute('tabindex','0');
+        mediaVideo.setAttribute('role','img');
 
         galleryArticle.append(mediaVideo, videoIcon);
 
@@ -218,20 +224,20 @@ async function displayMedias(medias, photoGraphPrice) {
     mediaTitle.textContent = title;
     mediaTitle.setAttribute("aria-label", title);
     mediaTitle.setAttribute("class", "media_title");
-    mediaTitle.setAttribute('tabindex',tabindex);
-    tabindex++;
+    mediaTitle.setAttribute('tabindex','0');
+    mediaTitle.setAttribute('role','heading');
 
     // Likes de l'article de la galerie
     mediaLikes.textContent = likes;
-    mediaLikes.setAttribute("aria-label", likes);
     mediaLikes.setAttribute("class", "media_likes");
-    mediaLikes.setAttribute('tabindex',tabindex);
-    tabindex++;
+    mediaLikes.setAttribute('tabindex','0');
+    mediaLikes.setAttribute('role','contentinfo');
 
     // Logo like
     likeHeart.setAttribute("src", '../assets/icons/heart.svg');
     likeHeart.setAttribute("alt", 'likes');
-    likeHeart.setAttribute('tabindex',tabindex);
+    likeHeart.setAttribute('tabindex','0');
+    likeHeart.setAttribute('role','img');
     likeInfo.setAttribute("class", "media_likeInfo");
     likeInfo.addEventListener('click', function(event) {
         let newLikes = parseInt(mediaLikes.textContent);
@@ -263,6 +269,7 @@ async function displayMedias(medias, photoGraphPrice) {
     totalLikes = totalLikes + likes;
     allLikes.textContent = totalLikes;
     });
+    dailyPrice.setAttribute("role", 'contentinfo');
 
     moreInfo.append(allLikes, darkHeart, dailyPrice);
 
@@ -270,11 +277,9 @@ async function displayMedias(medias, photoGraphPrice) {
 
     // Price + all likes
     moreInfo.setAttribute("class", "photograph-moreinfo");
-    allLikes.setAttribute("aria-label", totalLikes);
-    allLikes.setAttribute("tabindex", '6');
+    allLikes.setAttribute("tabindex", '0');
 
     dailyPrice.textContent = photoGraphPrice + '€ / jour';
-    dailyPrice.setAttribute("aria-label", photoGraphPrice);
 };
 
 // Affichage de la modal de media
@@ -301,6 +306,7 @@ async function displayModalMedia(mediasList, id, type) {
         mediaPicture.setAttribute("src", picture);
         mediaPicture.setAttribute('class','mediaModal-picture');
         mediaPicture.setAttribute("alt", media.title);
+        mediaPicture.setAttribute("role", 'img');
         modalContainer.appendChild(mediaPicture);
     }
     // Cas où le media est une vidéo
@@ -320,14 +326,17 @@ async function displayModalMedia(mediasList, id, type) {
     closeButton.setAttribute("src", '../assets/icons/redcross.svg');
     closeButton.setAttribute('class','mediaModal-closeButton');
     closeButton.setAttribute("aria-label", 'Close dialog');
+    closeButton.setAttribute('role','button');
     const previousButton = document.createElement('img');
     previousButton.setAttribute("src", '../assets/icons/previousarrow.svg');
     previousButton.setAttribute('class','mediaModal-previousButton');
     previousButton.setAttribute("aria-label", 'Previous image');
+    previousButton.setAttribute('role','button');
     const nextButton = document.createElement('img');
     nextButton.setAttribute("src", '../assets/icons/nextarrow.svg');
     nextButton.setAttribute('class','mediaModal-nextButton');
     nextButton.setAttribute("aria-label", 'Next image');
+    nextButton.setAttribute('role','button');
 
     modalContainer.append(titlePicture, closeButton, previousButton, nextButton);
 
