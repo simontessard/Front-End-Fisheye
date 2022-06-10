@@ -55,7 +55,8 @@
     display: flex;
     flex: 100%;
     position: relative;
-    padding-bottom: 10px;
+    margin-left: 100px;
+    margin-bottom: 50px;
 }
 
 .sortby-dropdown {
