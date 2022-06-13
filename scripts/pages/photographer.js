@@ -12,6 +12,8 @@ link.appendChild(logo);
 
 let totalLikes = 0;
 
+const portfolio = document.querySelector('#main');
+
 async function getPhotographer() {
     const URL = (window.location).href; // You can also use document.URL
     const photographerID = URL.substring(URL.lastIndexOf('=') + 1);
@@ -101,8 +103,6 @@ async function displayPhotographer(photographer) {
 };
 
 function displaySortBy(medias) { 
-    const portfolio = document.querySelector('#main');
-
     let mediasList = medias[0];
 
     // Bouton de liste déroulante
@@ -134,14 +134,11 @@ function displaySortBy(medias) {
     DropdownThirdOption.textContent = 'Titre';
     DropdownThirdOption.setAttribute('data-value', '2')
 
-    // Texte Trier Par
-    sortByContainer.appendChild(sortByText);
-
     // Les options de la liste
     sortByDropdownOption.append(DropdownFirstOption, DropdownSecondOption, DropdownThirdOption);
 
     sortByDropdown.appendChild(sortByDropdownOption);
-    sortByContainer.appendChild(sortByDropdown);
+    sortByContainer.append(sortByDropdown, sortByText);
 
     let listOptions = [DropdownFirstOption, DropdownSecondOption, DropdownThirdOption]
 
@@ -177,8 +174,6 @@ function displaySortBy(medias) {
 }
 
 function createGallery(mediasList) {
-    const portfolio = document.querySelector('#main');
-
     // Elements de la galerie
     const gallery = document.createElement('div');
     gallery.setAttribute("class", 'photograph-gallery');
@@ -295,8 +290,6 @@ function createGallery(mediasList) {
 
 // Affichage de la galerie photo/vidéo
 async function displayMedias(medias, photoGraphPrice) {
-    const portfolio = document.querySelector('#main');
-
     displaySortBy(medias);
 
     let mediasList = medias[0];
@@ -331,8 +324,6 @@ async function displayModalMedia(mediasList, id, type) {
     const galleryFile = await getPhotographerNameById(media.photographerId);
     const picture = `assets/photos/${galleryFile}/${media.image}`;
 
-    const portfolio = document.querySelector('#main');
-
     const modalMedia = document.createElement('div');
     modalMedia.setAttribute("class", "modal-media");
     const modalContainer = document.createElement('div');
@@ -358,6 +349,7 @@ async function displayModalMedia(mediasList, id, type) {
         mediaVideo.setAttribute("class", 'mediaModal-picture');
         modalContainer.appendChild(mediaVideo);
     }
+
     const titlePicture = document.createElement('p');
     titlePicture.textContent = media.title;
     titlePicture.setAttribute('class', 'second-title');
@@ -419,8 +411,6 @@ async function initPhotographer() {
     const { medias } = await getPhotographerMedia(photographer[0].id) || {};
 
     const photoGraphPrice = photographer[0].price;
-
-    console.log(medias);
 
     if (typeof photographer !== 'undefined') {
         displayPhotographer(photographer);
