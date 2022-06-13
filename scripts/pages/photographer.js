@@ -105,7 +105,7 @@ function displaySortBy(medias) {
     let mediasList = medias[0];
 
     // Bouton de liste déroulante
-    const sortByContainer = document.createElement('div');
+    const sortByContainer = document.createElement('section');
     sortByContainer.setAttribute("class", 'gallery-sortby');
 
     const sortByText = document.createElement('p');
@@ -190,7 +190,7 @@ function sortMedia(DropdownFirstOption, option, mediasList) {
 
 function createGallery(mediasList) {
     // Elements de la galerie
-    const gallery = document.createElement('div');
+    const gallery = document.createElement('section');
     gallery.setAttribute("class", 'photograph-gallery');
 
     // Reset des likes total
@@ -315,7 +315,7 @@ async function displayMedias(medias, photoGraphPrice) {
     let mediasList = medias[0];
     createGallery(mediasList);
 
-    const moreInfo = document.createElement('div');
+    const moreInfo = document.createElement('aside');
     moreInfo.setAttribute("class", "photograph-moreinfo");
 
     const dailyPrice = document.createElement('p');
