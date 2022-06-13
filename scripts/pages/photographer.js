@@ -404,15 +404,15 @@ async function displayModalMedia(mediasList, id, type) {
     modalMedia.style.display = "flex";
 
     closeButton.addEventListener("click", function () {
-        modalMedia.style.display = "none";
+        modalMedia.remove();
     });
     closeButton.addEventListener("keypress", function (event) {
         if (event.key === "Enter") {
-            modalMedia.style.display = "none";
+            modalMedia.remove();
         }
     });
     previousButton.addEventListener("click", function () {
-        modalMedia.style.display = "none";
+        modalMedia.remove();
         let previousMedia = mediasList[index - 1];
         if (previousMedia.hasOwnProperty('image')) {
             type = 'image';
@@ -420,14 +420,36 @@ async function displayModalMedia(mediasList, id, type) {
         else { type = 'video'; }
         displayModalMedia(mediasList, previousMedia.id, type)
     });
+    previousButton.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            modalMedia.remove();
+            let previousMedia = mediasList[index - 1];
+            if (previousMedia.hasOwnProperty('image')) {
+                type = 'image';
+            }
+            else { type = 'video'; }
+            displayModalMedia(mediasList, previousMedia.id, type)
+        }
+    });
     nextButton.addEventListener("click", function () {
-        modalMedia.style.display = "none";
+        modalMedia.remove();
         let nextMedia = mediasList[index + 1];
         if (nextMedia.hasOwnProperty('image')) {
             type = 'image';
         }
         else { type = 'video'; }
         displayModalMedia(mediasList, nextMedia.id, type)
+    });
+    nextButton.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            modalMedia.remove();
+            let nextMedia = mediasList[index + 1];
+            if (nextMedia.hasOwnProperty('image')) {
+                type = 'image';
+            }
+            else { type = 'video'; }
+            displayModalMedia(mediasList, nextMedia.id, type)
+        }
     });
     addFocus('media');
 }

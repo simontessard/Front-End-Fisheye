@@ -101,7 +101,6 @@ async function addFocus(type) {
         if (!isTabPressed) {
             return;
         }
-
         if (e.shiftKey) { // if shift key pressed for shift + tab combination
             if (document.activeElement === firstFocusableElement) {
                 lastFocusableElement.focus(); // add focus for the last focusable element
