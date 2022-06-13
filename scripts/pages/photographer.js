@@ -88,10 +88,9 @@ async function displayPhotographer(photographer) {
         contactButton.setAttribute('tabindex', '0');
         contactButton.setAttribute("aria-label", 'Contactez-moi');
         contactButton.textContent = 'Contactez-moi';
-
         contactButton.addEventListener('click', event => {
             displayModal();
-            addFocus();
+            addFocus('contact');
         })
 
         photographerInfo.appendChild(photographerName);
@@ -102,7 +101,7 @@ async function displayPhotographer(photographer) {
     }
 };
 
-function displaySortBy(medias) { 
+function displaySortBy(medias) {
     let mediasList = medias[0];
 
     // Bouton de liste déroulante
@@ -120,6 +119,11 @@ function displaySortBy(medias) {
     sortByDropdown.addEventListener('click', event => {
         sortByDropdown.classList.toggle('active');
     })
+    sortByDropdown.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            sortByDropdown.classList.toggle('active');
+        }
+    });
 
     const sortByDropdownOption = document.createElement('div');
     sortByDropdownOption.setAttribute("class", 'dropdown-option');
@@ -138,39 +142,50 @@ function displaySortBy(medias) {
     sortByDropdownOption.append(DropdownFirstOption, DropdownSecondOption, DropdownThirdOption);
 
     sortByDropdown.appendChild(sortByDropdownOption);
-    sortByContainer.append(sortByDropdown, sortByText);
+    sortByContainer.append(sortByText, sortByDropdown);
 
     let listOptions = [DropdownFirstOption, DropdownSecondOption, DropdownThirdOption]
 
-    listOptions.forEach(item => {
-        item.addEventListener('click', event => {
-        const gallery = document.querySelector('.photograph-gallery');
-          if (sortByDropdown.className === 'sortby-dropdown active') 
-          {
-            let oldActiveText = DropdownFirstOption.textContent;
-            let newActiveText = item.textContent;
-            DropdownFirstOption.textContent = newActiveText;
-            item.textContent = oldActiveText;
-
-            if (newActiveText === 'Popularité') {
-                mediasList = medias[0].sort((a, b) => (a.likes < b.likes ? 1 : -1));
-                gallery.remove();
-                createGallery(mediasList);
+    listOptions.forEach(option => {
+        option.setAttribute('tabindex', 0);
+        option.addEventListener('click', event => {
+            sortMedia(DropdownFirstOption, option, mediasList);
+        });
+        option.addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                sortMedia(DropdownFirstOption, option, mediasList);
             }
-            if (newActiveText === 'Date') {
-                mediasList = medias[0].sort((a,b)=> new Date(b.date).getTime() - new Date(a.date).getTime());
-                gallery.remove();
-                createGallery(mediasList);
-            }
-            if (newActiveText === 'Titre') {
-                mediasList = medias[0].sort((a, b) => a.title.localeCompare(b.title));
-                gallery.remove();
-                createGallery(mediasList);
-            }
-          }
         });
     });
     portfolio.appendChild(sortByContainer);
+}
+
+function sortMedia(DropdownFirstOption, option, mediasList) {
+    const gallery = document.querySelector('.photograph-gallery');
+    const sortByDropdown = document.querySelector('.sortby-dropdown');
+
+    if (sortByDropdown.className === 'sortby-dropdown active') {
+        let oldActiveText = DropdownFirstOption.textContent;
+        let newActiveText = option.textContent;
+        DropdownFirstOption.textContent = newActiveText;
+        option.textContent = oldActiveText;
+
+        if (newActiveText === 'Popularité') {
+            mediasList = mediasList.sort((a, b) => (a.likes < b.likes ? 1 : -1));
+            gallery.remove();
+            createGallery(mediasList);
+        }
+        if (newActiveText === 'Date') {
+            mediasList = mediasList.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+            gallery.remove();
+            createGallery(mediasList);
+        }
+        if (newActiveText === 'Titre') {
+            mediasList = mediasList.sort((a, b) => a.title.localeCompare(b.title));
+            gallery.remove();
+            createGallery(mediasList);
+        }
+    }
 }
 
 function createGallery(mediasList) {
@@ -180,7 +195,7 @@ function createGallery(mediasList) {
 
     // Reset des likes total
     totalLikes = 0;
-    
+
     // Galerie des medias
     mediasList.forEach(async (media) => {
         const { date, id, likes, photographerId, price, image, title, video } = media;
@@ -232,6 +247,11 @@ function createGallery(mediasList) {
 
             mediaVideo.addEventListener("click", function () {
                 displayModalMedia(mediasList, id, 'video');
+            });
+            mediaVideo.addEventListener("keypress", function (event) {
+                if (event.key === "Enter") {
+                    displayModalMedia(mediasList, id, 'video');
+                }
             });
         }
         // Info
@@ -326,6 +346,7 @@ async function displayModalMedia(mediasList, id, type) {
 
     const modalMedia = document.createElement('div');
     modalMedia.setAttribute("class", "modal-media");
+    modalMedia.setAttribute('tabindex', 0);
     const modalContainer = document.createElement('div');
     modalContainer.setAttribute("class", "modal-container");
     modalContainer.setAttribute("aria-label", 'Image closeup view');
@@ -337,6 +358,7 @@ async function displayModalMedia(mediasList, id, type) {
         mediaPicture.setAttribute('class', 'mediaModal-picture');
         mediaPicture.setAttribute("alt", media.title);
         mediaPicture.setAttribute("role", 'img');
+        mediaPicture.setAttribute('tabindex', 0);
         modalContainer.appendChild(mediaPicture);
     }
     // Cas où le media est une vidéo
@@ -347,27 +369,32 @@ async function displayModalMedia(mediasList, id, type) {
         mediaVideo.setAttribute("controls", "controls");
         mediaVideo.appendChild(source);
         mediaVideo.setAttribute("class", 'mediaModal-picture');
+        mediaVideo.setAttribute('tabindex', 0);
         modalContainer.appendChild(mediaVideo);
     }
 
     const titlePicture = document.createElement('p');
     titlePicture.textContent = media.title;
     titlePicture.setAttribute('class', 'second-title');
+    titlePicture.setAttribute('tabindex', 0);
     const closeButton = document.createElement('img');
     closeButton.setAttribute("src", '../assets/icons/redcross.svg');
     closeButton.setAttribute('class', 'mediaModal-closeButton');
     closeButton.setAttribute("aria-label", 'Close dialog');
     closeButton.setAttribute('role', 'button');
+    closeButton.setAttribute('tabindex', 0);
     const previousButton = document.createElement('img');
     previousButton.setAttribute("src", '../assets/icons/previousarrow.svg');
     previousButton.setAttribute('class', 'mediaModal-previousButton');
     previousButton.setAttribute("aria-label", 'Previous image');
     previousButton.setAttribute('role', 'button');
+    previousButton.setAttribute('tabindex', 0);
     const nextButton = document.createElement('img');
     nextButton.setAttribute("src", '../assets/icons/nextarrow.svg');
     nextButton.setAttribute('class', 'mediaModal-nextButton');
     nextButton.setAttribute("aria-label", 'Next image');
     nextButton.setAttribute('role', 'button');
+    nextButton.setAttribute('tabindex', 0);
 
     modalContainer.append(titlePicture, closeButton, previousButton, nextButton);
 
@@ -379,15 +406,18 @@ async function displayModalMedia(mediasList, id, type) {
     closeButton.addEventListener("click", function () {
         modalMedia.style.display = "none";
     });
+    closeButton.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            modalMedia.style.display = "none";
+        }
+    });
     previousButton.addEventListener("click", function () {
         modalMedia.style.display = "none";
         let previousMedia = mediasList[index - 1];
         if (previousMedia.hasOwnProperty('image')) {
             type = 'image';
         }
-        else {
-            type = 'video';
-        }
+        else { type = 'video'; }
         displayModalMedia(mediasList, previousMedia.id, type)
     });
     nextButton.addEventListener("click", function () {
@@ -396,11 +426,10 @@ async function displayModalMedia(mediasList, id, type) {
         if (nextMedia.hasOwnProperty('image')) {
             type = 'image';
         }
-        else {
-            type = 'video';
-        }
+        else { type = 'video'; }
         displayModalMedia(mediasList, nextMedia.id, type)
     });
+    addFocus('media');
 }
 
 // Initialisation d'un photographe
@@ -421,20 +450,18 @@ async function initPhotographer() {
 
 // Récupère les données d'un photographe grâce à son ID
 async function getPhotographerNameById(id) {
-
     return fetch('../data/photographers.json')
         .then(response => {
             // Convertit en JSON
             return response.json();
         })
         .then(data => {
-
             const dataPhotographer = data["photographers"].filter(item => item.id == id)[0] || {};
 
             let name = dataPhotographer.name;
 
             if (typeof name !== 'undefined') {
-                // Recupère le prénom du nom complet
+                // Récupère le prénom du nom complet
                 name = name.substring(0, name.indexOf(' ')).toLowerCase();
                 // Retire le tiret si il y en un
                 name = name.replace(/-/g, "");
