@@ -1,15 +1,16 @@
     // Ajout d'un lien vers l'accueil sur le logo
     const logo = document.querySelector(".logo");
+    const titre = document.querySelector("header h1");
     const header = document.querySelector('header');
     const link = document.createElement('a')
     header.insertBefore(link, logo);
+    titre.setAttribute('tabindex',0);
     link.setAttribute('alt','Fisheye Home page');
-    link.setAttribute('tabindex','1');
+    link.setAttribute('tabindex',0);
     link.setAttribute('href','index.html');
     link.appendChild(logo);
     
     async function getPhotographers() {
-
         // Données récupérées grâce au fichier JSON
         return fetch('../data/photographers.json')
         .then(response => {
@@ -21,24 +22,19 @@
         return ({
             photographers: [...data["photographers"]]})
         });
-
     }
 
     async function displayData(photographers) {
         const photographersSection = document.querySelector(".photographer_section");
-
-        let tabindex = 2;
 
         if (typeof photographers !== 'undefined') {
             photographers.forEach((photographer) => {
                 const photographerModel = photographerFactory(photographer);
                 const userCardDOM = photographerModel.getUserCardDOM();
                 // Désigne le premier enfant de la carte, soit la div contenent l'image et nom du photographe
-                userCardDOM.children[0].setAttribute("tabindex", tabindex);
-                tabindex++;
+                userCardDOM.children[0].setAttribute("tabindex", 0);
                 // Désigne le second enfant de la carte, soit la div contenent les informations du photographe
-                userCardDOM.children[1].setAttribute("tabindex", tabindex);
-                tabindex++;
+                userCardDOM.children[1].setAttribute("tabindex", 0);
                 // Assigner l'ID à la vignette du photographe
                 vignette = userCardDOM.children[0];
                 vignette.setAttribute("id", photographerModel.id);
@@ -58,4 +54,4 @@
         }
     };
     
-    init();
+init();
