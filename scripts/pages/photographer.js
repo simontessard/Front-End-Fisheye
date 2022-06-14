@@ -1,5 +1,5 @@
 import { initializeModal, displayModal, closeModal, addFocus } from "../utils/contactForm.js";
-import { headerFactory  } from "../factories/header.js";
+import { headerFactory } from "../factories/header.js";
 
 headerFactory();
 
@@ -271,6 +271,7 @@ function createGallery(mediasList) {
         likeHeart.setAttribute('role', 'img');
         likeInfo.setAttribute("class", "media_likeInfo");
         likeHeart.addEventListener('click', function (event) {
+            likeHeart.classList.toggle('liked');
             let newLikes = parseInt(mediaLikes.textContent);
             if (newLikes != likes + 1) {
                 mediaLikes.textContent = newLikes + 1;
@@ -281,6 +282,7 @@ function createGallery(mediasList) {
         });
         likeHeart.addEventListener('keypress', function (event) {
             if (event.key === "Enter") {
+                likeHeart.classList.toggle('liked');
                 let newLikes = parseInt(mediaLikes.textContent);
                 if (newLikes != likes + 1) {
                     mediaLikes.textContent = newLikes + 1;

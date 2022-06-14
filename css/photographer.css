@@ -2,8 +2,10 @@
     display: none;
     width: 100%;
     height: 100%;
-    position: fixed; /* Stay in place */
-    z-index: 10; /* Sit on top */
+    position: fixed;
+    /* Stay in place */
+    z-index: 10;
+    /* Sit on top */
     left: 0;
     top: 0;
     background-color: rgba(255, 255, 255, 0.5);
@@ -13,13 +15,15 @@
     height: auto;
     position: relative;
 }
+
 #contact_modal h2 {
     text-align: left;
 }
+
 #contact_modal img {
     position: absolute;
-    top:5px;
-    right:100px;
+    top: 5px;
+    right: 100px;
 }
 
 .photograph-header {
@@ -32,7 +36,7 @@
     align-items: center;
 }
 
-.photograph-header p{
+.photograph-header p {
     margin-block: 10px;
     font-family: 'DM Sans';
     font-weight: 400;
@@ -65,18 +69,18 @@
     width: 150px;
     overflow: visible;
     margin-left: 90px;
-    z-index:4;
+    z-index: 4;
 }
 
 .sortby-dropdown::before {
-    content:'';
+    content: '';
     position: absolute;
-    right:20px;
-    top:15px;
-    z-index:3;
+    right: 20px;
+    top: 15px;
+    z-index: 3;
     width: 8px;
     height: 8px;
-    border:2px solid white;
+    border: 2px solid white;
     border-top: 2px solid #911C1C;
     border-right: 2px solid #911C1C;
     transform: rotate(-45deg);
@@ -85,11 +89,11 @@
 }
 
 .sortby-dropdown.active::before {
-    top:22px;
+    top: 22px;
     transform: rotate(-225deg);
 }
 
-.sortby-dropdown.active .dropdown-option :nth-child(n+2){
+.sortby-dropdown.active .dropdown-option :nth-child(n+2) {
     display: block;
     border-top: 1px solid white;
 }
@@ -100,25 +104,26 @@
     display: none;
 }
 
-.sortby-dropdown .dropdown-option div{
+.sortby-dropdown .dropdown-option div {
     cursor: pointer;
     padding: 15px;
     padding-inline: 25px;
-    color:white;
+    color: white;
 }
 
-.sortby-dropdown.active .dropdown-option div:hover{
+.sortby-dropdown.active .dropdown-option div:hover {
     color: #000000;
 }
 
 .photograph-gallery {
     display: flex;
-    gap:50px;
+    gap: 50px;
     flex-flow: row wrap;
     margin-left: 100px;
 }
 
-.photograph-gallery article img, .photograph-gallery article video{
+.photograph-gallery article img,
+.photograph-gallery article video {
     cursor: pointer;
 }
 
@@ -141,7 +146,7 @@ article {
     font-size: 64px;
     line-height: 83px;
     color: #D3573C;
-    margin:0;
+    margin: 0;
 }
 
 .photograph-moreinfo {
@@ -167,12 +172,34 @@ article {
     margin-left: -45px;
 }
 
+.liked {
+    animation: heart 0.5s linear;
+}
+
+@keyframes heart {
+    0% {
+        transform: rotate(0deg) scale(2);
+    }
+
+    40% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    41% {
+        transform: rotate(360deg) scale(1);
+    }
+
+    100% {
+        transform: rotate(0deg) scale(1);
+    }
+}
+
 .sortByContainer {
     margin: 35px 100px;
     font-size: 500;
 }
 
-.sortByContainer select{
+.sortByContainer select {
     background-color: #901C1C;
     width: 110px;
     padding: 10px;
@@ -184,10 +211,10 @@ article {
 
 .sortByContainer select::-ms-expand {
     display: none;
-    
+
 }
 
-.sortByContainer select option{
+.sortByContainer select option {
     background-color: #901C1C;
     padding: 5px;
 }
@@ -265,41 +292,47 @@ article {
 }
 
 .modal-media {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 10; /* Sit on top */
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 10;
+    /* Sit on top */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
     background-color: white;
     justify-content: center;
     align-items: center;
 }
 
 .modal-container {
-   position: relative;
+    position: relative;
 }
 
 .mediaModal-closeButton {
     position: absolute;
-    top:2%;
-    right:-6%;
+    top: 2%;
+    right: -6%;
     cursor: pointer;
 }
 
 .mediaModal-previousButton {
     position: absolute;
-    top:50%;
-    left:-6%;
+    top: 50%;
+    left: -6%;
     cursor: pointer;
 }
 
 .mediaModal-nextButton {
     position: absolute;
-    top:50%;
-    right:-6%;
+    top: 50%;
+    right: -6%;
     cursor: pointer;
 }
 
