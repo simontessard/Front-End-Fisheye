@@ -57,7 +57,6 @@ async function displayPhotographer(photographer) {
         photographerName.textContent = name;
         photographerName.setAttribute('class', 'photograph-title');
         photographerName.setAttribute('tabindex', '0');
-        photographerName.setAttribute('role', 'heading');
 
         const photographerMoreInfo = document.createElement('div');
         photographerMoreInfo.setAttribute('tabindex', '0');
@@ -107,6 +106,7 @@ function displaySortBy(medias) {
     sortByText.textContent = 'Trier par';
     sortByText.setAttribute('tabindex', '0');
     sortByText.setAttribute('role', 'heading');
+    sortByText.setAttribute('aria-level', 3);
 
     const sortByDropdown = document.createElement('div');
     sortByDropdown.setAttribute("class", 'sortby-dropdown');
@@ -237,7 +237,6 @@ function createGallery(mediasList) {
             mediaVideo.appendChild(source);
             mediaVideo.setAttribute("class", 'gallery_img');
             mediaVideo.setAttribute('tabindex', '0');
-            mediaVideo.setAttribute('role', 'img');
 
             galleryArticle.append(mediaVideo, videoIcon);
 
@@ -258,7 +257,6 @@ function createGallery(mediasList) {
         mediaTitle.setAttribute("aria-label", title);
         mediaTitle.setAttribute("class", "media_title");
         mediaTitle.setAttribute('tabindex', '0');
-        mediaTitle.setAttribute('role', 'heading');
 
         // Likes de l'article de la galerie
         mediaLikes.textContent = likes;
@@ -268,7 +266,7 @@ function createGallery(mediasList) {
 
         // Logo like
         likeHeart.setAttribute("src", '../assets/icons/heart.svg');
-        likeHeart.setAttribute("alt", 'likes');
+        likeHeart.setAttribute("alt", 'Coeur rouge');
         likeHeart.setAttribute('tabindex', '0');
         likeHeart.setAttribute('role', 'img');
         likeInfo.setAttribute("class", "media_likeInfo");
@@ -325,7 +323,7 @@ async function displayMedias(medias, photoGraphPrice) {
     const darkHeart = document.createElement('img');
     darkHeart.setAttribute("src", '../assets/icons/heart.svg');
     darkHeart.setAttribute("class", 'dark-heart');
-    darkHeart.setAttribute("alt", 'Coeur rouge');
+    darkHeart.setAttribute("alt", 'Coeur noir');
 
     moreInfo.append(allLikes, darkHeart, dailyPrice);
     portfolio.appendChild(moreInfo);
