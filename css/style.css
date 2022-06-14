@@ -84,18 +84,18 @@ a {
 
 .photographer_section .photographer_location {
     color: #901C1C;
-    font-size: 13px;
-    line-height: 17px;
+    font-size: 20px;
+    line-height: 20px;
 }
 
 .photographer_section .photographer_slogan {
     color: #000000;
-    font-size: 10px;
-    line-height: 13px;
+    font-size: 14px;
+    line-height: 15px;
 }
 
 .photographer_section .photographer_pricing {
-    font-size: 9px;
-    line-height: 12px;
+    font-size: 12px;
+    line-height: 15px;
     color: #757575;
 }

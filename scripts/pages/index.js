@@ -5,7 +5,7 @@
     const link = document.createElement('a')
     header.insertBefore(link, logo);
     titre.setAttribute('tabindex',0);
-    link.setAttribute('alt','Fisheye Home page');
+    logo.setAttribute('alt','Fisheye logo - Page accueil');
     link.setAttribute('tabindex',0);
     link.setAttribute('href','index.html');
     link.appendChild(logo);

@@ -5,7 +5,7 @@ const logo = document.querySelector(".logo");
 const header = document.querySelector('header');
 const link = document.createElement('a')
 header.insertBefore(link, logo);
-logo.setAttribute('alt', 'Fisheye Home page');
+logo.setAttribute('alt', 'Fisheye logo - Page accueil');
 link.setAttribute('tabindex', '0');
 link.setAttribute('href', 'index.html');
 link.appendChild(logo);
@@ -208,7 +208,7 @@ function createGallery(mediasList) {
         const mediaImg = document.createElement('img');
         const mediaVideo = document.createElement('video');
         const mediaTitle = document.createElement('h3');
-        const mediaLikes = document.createElement('p');
+        const mediaLikes = document.createElement('h3');
         const likeHeart = document.createElement('img');
         const likeInfo = document.createElement('div');
         const articleInfo = document.createElement('div');
