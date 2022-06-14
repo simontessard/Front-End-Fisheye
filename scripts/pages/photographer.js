@@ -270,7 +270,7 @@ function createGallery(mediasList) {
         likeHeart.setAttribute('tabindex', '0');
         likeHeart.setAttribute('role', 'img');
         likeInfo.setAttribute("class", "media_likeInfo");
-        likeInfo.addEventListener('click', function (event) {
+        likeHeart.addEventListener('click', function (event) {
             let newLikes = parseInt(mediaLikes.textContent);
             if (newLikes != likes + 1) {
                 mediaLikes.textContent = newLikes + 1;
@@ -375,19 +375,19 @@ async function displayModalMedia(mediasList, id, type) {
     const closeButton = document.createElement('img');
     closeButton.setAttribute("src", '../assets/icons/redcross.svg');
     closeButton.setAttribute('class', 'mediaModal-closeButton');
-    closeButton.setAttribute("aria-label", 'Close dialog');
+    closeButton.setAttribute("aria-label", 'Fermer aperçu média');
     closeButton.setAttribute('role', 'button');
     closeButton.setAttribute('tabindex', 0);
     const previousButton = document.createElement('img');
     previousButton.setAttribute("src", '../assets/icons/previousarrow.svg');
     previousButton.setAttribute('class', 'mediaModal-previousButton');
-    previousButton.setAttribute("aria-label", 'Previous image');
+    previousButton.setAttribute("aria-label", 'Image précédente');
     previousButton.setAttribute('role', 'button');
     previousButton.setAttribute('tabindex', 0);
     const nextButton = document.createElement('img');
     nextButton.setAttribute("src", '../assets/icons/nextarrow.svg');
     nextButton.setAttribute('class', 'mediaModal-nextButton');
-    nextButton.setAttribute("aria-label", 'Next image');
+    nextButton.setAttribute("aria-label", 'Image suivante');
     nextButton.setAttribute('role', 'button');
     nextButton.setAttribute('tabindex', 0);
 
