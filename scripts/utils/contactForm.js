@@ -16,7 +16,7 @@ function initializeModal() {
 
     const modal = document.getElementById("contact_modal");
     modal.setAttribute('role', 'dialog');
-    modal.setAttribute('aria-labelledby', contactMeText.textContent);
+    modal.setAttribute('aria-label', 'Formulaire pour contacter un photographe');
     modal.setAttribute('tabindex', '0');
     modal.setAttribute('aria-hidden', 'true');
 

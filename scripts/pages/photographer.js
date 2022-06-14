@@ -51,6 +51,7 @@ async function getPhotographerMedia(photographerID) {
 // Affichage de l'entête d'un photographe sur sa page perso
 async function displayPhotographer(photographer) {
     const photographersHeader = document.querySelector(".photograph-header");
+    photographersHeader.setAttribute('aria-label', 'Les informations du photographe')
 
     const { name, city, country, tagline, price, portrait, id } = photographer[0];
 
@@ -107,6 +108,7 @@ function displaySortBy(medias) {
     // Bouton de liste déroulante
     const sortByContainer = document.createElement('section');
     sortByContainer.setAttribute("class", 'gallery-sortby');
+    sortByContainer.setAttribute("aria-label", 'Liste déroulante de tri des médias du photographe');
 
     const sortByText = document.createElement('p');
     sortByText.textContent = 'Trier par';
@@ -192,6 +194,7 @@ function createGallery(mediasList) {
     // Elements de la galerie
     const gallery = document.createElement('section');
     gallery.setAttribute("class", 'photograph-gallery');
+    gallery.setAttribute("aria-label", 'Galerie des médias du photographe');
 
     // Reset des likes total
     totalLikes = 0;
@@ -317,6 +320,7 @@ async function displayMedias(medias, photoGraphPrice) {
 
     const moreInfo = document.createElement('aside');
     moreInfo.setAttribute("class", "photograph-moreinfo");
+    moreInfo.setAttribute("aria-label", "Informations supplémentaires du photographe");
 
     const dailyPrice = document.createElement('p');
     dailyPrice.setAttribute("role", 'contentinfo');
