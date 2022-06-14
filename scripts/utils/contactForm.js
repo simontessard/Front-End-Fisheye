@@ -69,6 +69,15 @@ function initializeModal() {
     submitButton.setAttribute('class', 'contact_button');
     submitButton.setAttribute('type', 'submit');
 
+    submitButton.addEventListener('click', event => {
+        event.preventDefault();
+
+        console.log('Le prénom que vous soumettez est le suivant : ' + prenomInput.value);
+        console.log('Le nom que vous soumettez est le suivant : ' + nomInput.value);
+        console.log('Le mail que vous soumettez est le suivant : ' + emailInput.value);
+        console.log('Votre message envoyé est le suivant : ' + messageInput.value);
+    })
+
     form.append(prenomLabel, prenomInput, nomLabel, nomInput, emailLabel, emailInput, messageLabel, messageInput);  
     document.querySelector('form').appendChild(submitButton);
 }
@@ -115,4 +124,5 @@ async function addFocus(type) {
     });
     firstFocusableElement.focus();
 }
+
 export { displayModal, closeModal, initializeModal, addFocus }
