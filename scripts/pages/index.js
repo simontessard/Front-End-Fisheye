@@ -3,12 +3,15 @@
     const titre = document.querySelector("header h1");
     const header = document.querySelector('header');
     const link = document.createElement('a')
+    const nav = document.createElement('nav');
     header.insertBefore(link, logo);
+    header.appendChild(nav);
     titre.setAttribute('tabindex',0);
     logo.setAttribute('alt','Fisheye logo - Page accueil');
     link.setAttribute('tabindex',0);
     link.setAttribute('href','index.html');
     link.appendChild(logo);
+    nav.append(link, titre);
 
     async function getPhotographers() {
         // Données récupérées grâce au fichier JSON
