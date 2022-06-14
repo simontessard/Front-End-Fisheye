@@ -9,7 +9,7 @@
     link.setAttribute('tabindex',0);
     link.setAttribute('href','index.html');
     link.appendChild(logo);
-    
+
     async function getPhotographers() {
         // Données récupérées grâce au fichier JSON
         return fetch('../data/photographers.json')

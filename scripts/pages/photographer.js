@@ -1,14 +1,7 @@
 import { initializeModal, displayModal, closeModal, addFocus } from "../utils/contactForm.js";
+import { headerFactory  } from "../factories/header.js";
 
-// Ajout d'un lien vers l'accueil sur le logo
-const logo = document.querySelector(".logo");
-const header = document.querySelector('header');
-const link = document.createElement('a')
-header.insertBefore(link, logo);
-logo.setAttribute('alt', 'Fisheye logo - Page accueil');
-link.setAttribute('tabindex', '0');
-link.setAttribute('href', 'index.html');
-link.appendChild(logo);
+headerFactory();
 
 let totalLikes = 0;
 
