@@ -206,6 +206,7 @@ function createGallery(mediasList) {
         const likeInfo = document.createElement('div');
         const articleInfo = document.createElement('div');
         const galleryArticle = document.createElement('article');
+        const allLikes = document.querySelector('.photograph-moreinfo p');
 
         // Image de l'article de la galerie
         if (image != null) {
@@ -275,9 +276,11 @@ function createGallery(mediasList) {
             let newLikes = parseInt(mediaLikes.textContent);
             if (newLikes != likes + 1) {
                 mediaLikes.textContent = newLikes + 1;
+                allLikes.textContent = parseInt(allLikes.textContent) + 1;
             }
             else {
                 mediaLikes.textContent = newLikes - 1;
+                allLikes.textContent = parseInt(allLikes.textContent) - 1;
             }
         });
         likeHeart.addEventListener('keypress', function (event) {
@@ -298,7 +301,6 @@ function createGallery(mediasList) {
         gallery.appendChild(galleryArticle);
         portfolio.appendChild(gallery);
 
-        const allLikes = document.querySelector('.photograph-moreinfo p');
         totalLikes = totalLikes + likes;
         allLikes.textContent = totalLikes;
     });
@@ -347,6 +349,8 @@ async function displayModalMedia(mediasList, id, type) {
     const modalContainer = document.createElement('div');
     modalContainer.setAttribute("class", "modal-container");
     modalContainer.setAttribute("aria-label", 'Image closeup view');
+
+
 
     // Cas où le media est une image
     if (type == 'image') {
@@ -448,6 +452,30 @@ async function displayModalMedia(mediasList, id, type) {
             displayModalMedia(mediasList, nextMedia.id, type)
         }
     });
+    // Gère la navigation avec les flèches du clavier
+    document.onkeydown = (e) => {
+        let isModalNull = document.querySelector('.modal-media');
+        if (isModalNull != null) {
+            e = e || window.event;
+            if (e.keyCode === 37) {
+                modalMedia.remove();
+                let previousMedia = mediasList[index - 1];
+                if (previousMedia.hasOwnProperty('image')) {
+                    type = 'image';
+                }
+                else { type = 'video'; }
+                displayModalMedia(mediasList, previousMedia.id, type)
+            } else if (e.keyCode === 39) {
+                modalMedia.remove();
+                let nextMedia = mediasList[index + 1];
+                if (nextMedia.hasOwnProperty('image')) {
+                    type = 'image';
+                }
+                else { type = 'video'; }
+                displayModalMedia(mediasList, nextMedia.id, type)
+            }
+        }
+    }
     addFocus('media');
 }
 
