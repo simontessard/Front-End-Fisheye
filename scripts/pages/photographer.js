@@ -59,6 +59,7 @@ async function displayPhotographer (photographer) {
     photographerName.textContent = name
     photographerName.setAttribute('class', 'photograph-title')
     photographerName.setAttribute('tabindex', '0')
+    photographerName.setAttribute('role', 'heading')
 
     const photographerMoreInfo = document.createElement('div')
     photographerMoreInfo.setAttribute('tabindex', '0')
@@ -128,12 +129,15 @@ function displaySortBy (medias) {
   const DropdownFirstOption = document.createElement('div')
   DropdownFirstOption.textContent = 'Popularité'
   DropdownFirstOption.setAttribute('data-value', '0')
+  DropdownFirstOption.setAttribute('role', 'option')
   const DropdownSecondOption = document.createElement('div')
   DropdownSecondOption.textContent = 'Date'
   DropdownSecondOption.setAttribute('data-value', '1')
+  DropdownSecondOption.setAttribute('role', 'option')
   const DropdownThirdOption = document.createElement('div')
   DropdownThirdOption.textContent = 'Titre'
   DropdownThirdOption.setAttribute('data-value', '2')
+  DropdownThirdOption.setAttribute('role', 'option')
 
   // Les options de la liste
   sortByDropdownOption.append(DropdownFirstOption, DropdownSecondOption, DropdownThirdOption)
@@ -239,6 +243,7 @@ function createGallery (mediasList) {
       mediaVideo.appendChild(source)
       mediaVideo.setAttribute('class', 'gallery_img')
       mediaVideo.setAttribute('tabindex', '0')
+      mediaVideo.setAttribute('role', 'img')
 
       galleryArticle.append(mediaVideo, videoIcon)
 
@@ -259,6 +264,7 @@ function createGallery (mediasList) {
     mediaTitle.setAttribute('aria-label', title)
     mediaTitle.setAttribute('class', 'media_title')
     mediaTitle.setAttribute('tabindex', '0')
+    mediaTitle.setAttribute('role', 'heading')
 
     // Likes de l'article de la galerie
     mediaLikes.textContent = likes
@@ -322,6 +328,7 @@ async function displayMedias (medias, photoGraphPrice) {
 
   const allLikes = document.createElement('p')
   allLikes.setAttribute('tabindex', '0')
+  allLikes.setAttribute('role', 'contentinfo')
 
   const darkHeart = document.createElement('img')
   darkHeart.setAttribute('src', '../assets/icons/heart.svg')
