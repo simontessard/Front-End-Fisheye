@@ -40,6 +40,7 @@ function photographerFactory (data) {
 
     const informations = document.createElement('article')
     informations.setAttribute('class', 'photographer_information')
+    informations.setAttribute('role', 'contentinfo')
 
     article.appendChild(informations)
 
@@ -50,3 +51,5 @@ function photographerFactory (data) {
   }
   return { name, picture, getUserCardDOM, id }
 }
+
+export { photographerFactory }
