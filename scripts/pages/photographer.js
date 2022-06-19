@@ -3,7 +3,7 @@
 import { initializeModal, displayModal, addFocus } from '../utils/contactForm.js'
 import { headerFactory } from '../factories/header.js'
 
-headerFactory()
+headerFactory('photographer')
 
 let totalLikes = 0
 
@@ -19,8 +19,6 @@ async function getPhotographer () {
       return response.json()
     })
     .then(data => {
-      // Affiche les données du photographe grâce à l'id recupérée dans l'URL
-      console.log(data.photographers.find(item => item.id == photographerID))
       // Retourner les données du photographe en question
       return ({
         photographer: [data.photographers.find(item => item.id == photographerID)]
@@ -60,6 +58,7 @@ async function displayPhotographer (photographer) {
     photographerName.setAttribute('class', 'photograph-title')
     photographerName.setAttribute('tabindex', '0')
     photographerName.setAttribute('role', 'heading')
+    photographerName.setAttribute('aria-level', 1)
 
     const photographerMoreInfo = document.createElement('div')
     photographerMoreInfo.setAttribute('tabindex', '0')
@@ -244,6 +243,7 @@ function createGallery (mediasList) {
       mediaVideo.setAttribute('class', 'gallery_img')
       mediaVideo.setAttribute('tabindex', '0')
       mediaVideo.setAttribute('role', 'img')
+      mediaVideo.setAttribute('alt', 'Aperçu de la vidéo ' + title)
 
       galleryArticle.append(mediaVideo, videoIcon)
 
@@ -265,6 +265,7 @@ function createGallery (mediasList) {
     mediaTitle.setAttribute('class', 'media_title')
     mediaTitle.setAttribute('tabindex', '0')
     mediaTitle.setAttribute('role', 'heading')
+    mediaTitle.setAttribute('aria-level', 3)
 
     // Likes de l'article de la galerie
     mediaLikes.textContent = likes
