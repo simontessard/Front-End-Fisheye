@@ -86,6 +86,8 @@ async function displayPhotographer (photographer) {
     contactButton.addEventListener('click', event => {
       displayModal()
       addFocus('contact')
+      portfolio.setAttribute('aria-hidden', 'true')
+      document.querySelector('header').setAttribute('aria-hidden', 'true')
     })
 
     photographerInfo.appendChild(photographerName)
@@ -344,6 +346,13 @@ async function displayMedias (medias, photoGraphPrice) {
 async function displayModalMedia (mediasList, id, type) {
   const media = mediasList.filter(item => item.id == id)[0]
 
+  // Cacher les éléments pour les lecteurs d'écran
+  const hidedElements = document.querySelectorAll('.photograph-header, .gallery-sortby, .photograph-moreinfo, .photograph-gallery')
+  hidedElements.forEach((item) => {
+    item.setAttribute('aria-hidden', 'true')
+  })
+  document.querySelector('header').setAttribute('aria-hidden', 'true')
+
   // Récupération de l'index du media cliqué
   const index = mediasList.indexOf(media)
 
@@ -352,10 +361,11 @@ async function displayModalMedia (mediasList, id, type) {
 
   const modalMedia = document.createElement('div')
   modalMedia.setAttribute('class', 'modal-media')
+  modalMedia.setAttribute('role', 'dialog')
+  modalMedia.setAttribute('aria-label', 'Aperçu détaillé du média')
   modalMedia.setAttribute('tabindex', 0)
   const modalContainer = document.createElement('div')
   modalContainer.setAttribute('class', 'modal-container')
-  modalContainer.setAttribute('aria-label', 'Image closeup view')
 
   // Cas où le media est une image
   if (type == 'image') {
@@ -379,24 +389,29 @@ async function displayModalMedia (mediasList, id, type) {
     modalContainer.appendChild(mediaVideo)
   }
 
-  const titlePicture = document.createElement('p')
+  const titlePicture = document.createElement('h2')
   titlePicture.textContent = media.title
   titlePicture.setAttribute('class', 'second-title')
+  titlePicture.setAttribute('role', 'heading')
+  titlePicture.setAttribute('aria-level', 2)
   titlePicture.setAttribute('tabindex', 0)
   const closeButton = document.createElement('img')
   closeButton.setAttribute('src', '../assets/icons/redcross.svg')
+  closeButton.setAttribute('alt', 'Croix rouge')
   closeButton.setAttribute('class', 'mediaModal-closeButton')
   closeButton.setAttribute('aria-label', 'Fermer aperçu média')
   closeButton.setAttribute('role', 'button')
   closeButton.setAttribute('tabindex', 0)
   const previousButton = document.createElement('img')
   previousButton.setAttribute('src', '../assets/icons/previousarrow.svg')
+  previousButton.setAttribute('alt', 'Flèche rouge pointant vers la gauche')
   previousButton.setAttribute('class', 'mediaModal-previousButton')
   previousButton.setAttribute('aria-label', 'Image précédente')
   previousButton.setAttribute('role', 'button')
   previousButton.setAttribute('tabindex', 0)
   const nextButton = document.createElement('img')
   nextButton.setAttribute('src', '../assets/icons/nextarrow.svg')
+  nextButton.setAttribute('alt', 'Flèche rouge pointant vers la droite')
   nextButton.setAttribute('class', 'mediaModal-nextButton')
   nextButton.setAttribute('aria-label', 'Image suivante')
   nextButton.setAttribute('role', 'button')
@@ -411,10 +426,18 @@ async function displayModalMedia (mediasList, id, type) {
 
   closeButton.addEventListener('click', function () {
     modalMedia.remove()
+    hidedElements.forEach((item) => {
+      item.setAttribute('aria-hidden', 'false')
+    })
+    document.querySelector('header').setAttribute('aria-hidden', 'false')
   })
   closeButton.addEventListener('keypress', function (event) {
     if (event.key === 'Enter') {
       modalMedia.remove()
+      hidedElements.forEach((item) => {
+        item.setAttribute('aria-hidden', 'false')
+      })
+      document.querySelector('header').setAttribute('aria-hidden', 'false')
     }
   })
   previousButton.addEventListener('click', function () {
