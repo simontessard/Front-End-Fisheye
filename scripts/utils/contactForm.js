@@ -18,7 +18,6 @@ function initializeModal () {
   modal.setAttribute('role', 'dialog')
   modal.setAttribute('aria-label', 'Formulaire pour contacter un photographe')
   modal.setAttribute('tabindex', '0')
-  modal.setAttribute('aria-hidden', 'true')
 
   const form = document.querySelector('form div')
 
@@ -30,10 +29,14 @@ function initializeModal () {
 
   const closeButton = document.querySelector('.modal-dialog img')
   closeButton.setAttribute('aria-label', 'Close')
+  closeButton.setAttribute('alt', 'Croix blanche')
+  closeButton.setAttribute('role', 'img')
   closeButton.setAttribute('tabindex', '0')
 
   closeButton.addEventListener('click', event => {
     closeModal()
+    document.querySelector('#main').setAttribute('aria-hidden', 'false')
+    document.querySelector('header').setAttribute('aria-hidden', 'false')
   })
 
   const prenomLabel = document.createElement('label')
@@ -42,6 +45,7 @@ function initializeModal () {
   const prenomInput = document.createElement('input')
   prenomInput.setAttribute('id', 'firstName')
   prenomInput.setAttribute('type', 'text')
+  prenomInput.setAttribute('autocomplete', 'given-name')
 
   const nomLabel = document.createElement('label')
   nomLabel.setAttribute('for', 'lastName')
@@ -49,6 +53,7 @@ function initializeModal () {
   const nomInput = document.createElement('input')
   nomInput.setAttribute('id', 'lastName')
   nomInput.setAttribute('type', 'text')
+  nomInput.setAttribute('autocomplete', 'family-name')
 
   const emailLabel = document.createElement('label')
   emailLabel.setAttribute('for', 'email')
@@ -56,12 +61,14 @@ function initializeModal () {
   const emailInput = document.createElement('input')
   emailInput.setAttribute('id', 'email')
   emailInput.setAttribute('type', 'email')
+  emailInput.setAttribute('autocomplete', 'email')
 
   const messageLabel = document.createElement('label')
   messageLabel.setAttribute('for', 'message')
   messageLabel.textContent = 'Votre message'
   const messageInput = document.createElement('input')
   messageInput.setAttribute('id', 'message')
+  messageInput.setAttribute('autocomplete', 'off')
   messageInput.style.height = '200px'
 
   const submitButton = document.createElement('input')
@@ -99,7 +106,6 @@ async function addFocus (type) {
     firstFocusableElement = modal.querySelectorAll('.modal-container img')[0] // get first element to be focused inside modal
     focusableContent = modal.querySelectorAll('.modal-container img')
   }
-  console.log(focusableContent)
 
   const lastFocusableElement = focusableContent[focusableContent.length - 1] // get last element to be focused inside modal
 
