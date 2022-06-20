@@ -38,6 +38,13 @@ function initializeModal () {
     document.querySelector('#main').setAttribute('aria-hidden', 'false')
     document.querySelector('header').setAttribute('aria-hidden', 'false')
   })
+  closeButton.addEventListener('keypress', function (event) {
+    if (event.key === 'Enter') {
+      closeModal()
+      document.querySelector('#main').setAttribute('aria-hidden', 'false')
+      document.querySelector('header').setAttribute('aria-hidden', 'false')
+    }
+  })
 
   const prenomLabel = document.createElement('label')
   prenomLabel.setAttribute('for', 'firstName')
